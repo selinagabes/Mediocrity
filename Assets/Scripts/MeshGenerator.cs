@@ -7,7 +7,7 @@ public class MeshGenerator : MonoBehaviour
 {
     public MeshFilter Walls;
     public SquareGrid squareGrid;
-
+    public int tileSize = -1;
     public MeshFilter Floor;
     List<Vector3> vertices;
     List<int> triangles;
@@ -40,7 +40,8 @@ public class MeshGenerator : MonoBehaviour
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangles.ToArray();
         mesh.RecalculateNormals();
-        int tileSize = 10;
+        if(tileSize == -1)
+             tileSize = 10;
         Vector2[] uvs = new Vector2[vertices.Count];
         for (int i = 0; i < vertices.Count; i++)
         {
@@ -58,7 +59,7 @@ public class MeshGenerator : MonoBehaviour
         List<Vector3> wallVertices = new List<Vector3>();
         List<int> wallTriangles = new List<int>();
         Mesh wallMesh = new Mesh();
-        float wallHeight = 2;
+        float wallHeight = 4;
         foreach (List<int> outline in outlines)
         {
             for (int i = 0; i < outline.Count-1; i++)
