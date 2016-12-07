@@ -6,11 +6,11 @@ using System.Linq;
 
 public class MeshGenerator : MonoBehaviour
 {
-    public MeshFilter Walls;
+    public MeshFilter Floor;
     public SquareGrid squareGrid;
     public float wallHeight; 
     public int tileSize = -1;
-    public MeshFilter Floor;
+    public MeshFilter Walls;
     List<Vector3> vertices;
     List<Vector3> wallVertices;
     List<int> triangles;
@@ -23,7 +23,7 @@ public class MeshGenerator : MonoBehaviour
         triangleDictionary.Clear();
         outlines.Clear();
         checkedVertices.Clear();
-        // wallVertices.Clear();
+        //wallVertices.Clear();
 
         squareGrid = new SquareGrid(map, squareSize);
 
@@ -39,7 +39,7 @@ public class MeshGenerator : MonoBehaviour
         }
 
         Mesh mesh = new Mesh();
-        Floor.mesh = mesh;
+        Walls.mesh = mesh;
 
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangles.ToArray();
@@ -59,6 +59,10 @@ public class MeshGenerator : MonoBehaviour
         Debug.Log(min);
     }
 
+    public List<Vector3> GetWalls()
+    {
+        return wallVertices;
+    }
     public Vector3 GetMinimumVertex()
     {
 
@@ -108,9 +112,9 @@ public class MeshGenerator : MonoBehaviour
         }
         wallMesh.vertices = wallVertices.ToArray();
         wallMesh.triangles = wallTriangles.ToArray();
-        Walls.mesh = wallMesh;
+        Floor.mesh = wallMesh;
 
-        MeshCollider wallCollider = Walls.gameObject.AddComponent<MeshCollider>();
+        MeshCollider wallCollider = Floor.gameObject.AddComponent<MeshCollider>();
         wallCollider.sharedMesh = wallMesh;
         PhysicMaterial mat = new PhysicMaterial();
         wallCollider.sharedMaterial = mat;

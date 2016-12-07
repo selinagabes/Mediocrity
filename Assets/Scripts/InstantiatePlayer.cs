@@ -23,7 +23,6 @@ public class InstantiatePlayer : MonoBehaviour {
            
         
         PlayerOne.SetActive(true);
-        Debug.Log("In Spawn Player End");
     }
     void SpawnPlayerTwo()
     {

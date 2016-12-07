@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-    int count = 0;
     Rigidbody rigidbody;
     Vector3 velocity;
 
@@ -11,7 +10,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();      
-        Debug.Log("In Player Start");
+        
     }
     
     // Update is called once per frame
