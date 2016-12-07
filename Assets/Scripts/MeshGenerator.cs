@@ -83,6 +83,7 @@ public class MeshGenerator : MonoBehaviour
         wallVertices = new List<Vector3>();
         List<int> wallTriangles = new List<int>();
         Mesh wallMesh = new Mesh();
+        if(wallHeight==-1)
          wallHeight = 4;
         foreach (List<int> outline in outlines)
         {
@@ -111,6 +112,9 @@ public class MeshGenerator : MonoBehaviour
 
         MeshCollider wallCollider = Walls.gameObject.AddComponent<MeshCollider>();
         wallCollider.sharedMesh = wallMesh;
+        PhysicMaterial mat = new PhysicMaterial();
+        wallCollider.sharedMaterial = mat;
+       
     }
 
     void TriangulateSquare(Square square)

@@ -32,7 +32,7 @@ public class MapGenerator : MonoBehaviour
         for (int i = 0; i < 5; i++)
             SmoothMap();
 
-        int borderSize = 4;
+        int borderSize = 10;
         int[,] borderedMap = new int[width + borderSize * 2, height + borderSize * 2];
 
 
