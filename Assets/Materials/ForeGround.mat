@@ -7,9 +7,8 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: ForeGround
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _EMISSION _GLOSSYREFLECTIONS_OFF _METALLICGLOSSMAP
-    _NORMALMAP _PARALLAXMAP _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A _SPECULARHIGHLIGHTS_OFF
+  m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _EMISSION _METALLICGLOSSMAP _PARALLAXMAP
   m_LightmapFlags: 1
   m_CustomRenderQueue: 3000
   stringTagMap:
@@ -20,7 +19,13 @@ Material:
     - first:
         name: _BumpMap
       second:
-        m_Texture: {fileID: 2800000, guid: 778d42dc11de9e348b256ae212ef5f66, type: 3}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _Control
+      second:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -60,6 +65,30 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
+        name: _Normal0
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _Normal1
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _Normal2
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _Normal3
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
         name: _OcclusionMap
       second:
         m_Texture: {fileID: 2800000, guid: 778d42dc11de9e348b256ae212ef5f66, type: 3}
@@ -69,6 +98,36 @@ Material:
         name: _ParallaxMap
       second:
         m_Texture: {fileID: 2800000, guid: 778d42dc11de9e348b256ae212ef5f66, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _SpecGlossMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _Splat0
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _Splat1
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _Splat2
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _Splat3
+      second:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -86,16 +145,16 @@ Material:
       second: 10
     - first:
         name: _GlossMapScale
-      second: 0.711
+      second: 1
     - first:
         name: _Glossiness
       second: 0
     - first:
         name: _GlossyReflections
-      second: 0
+      second: 1
     - first:
         name: _Metallic
-      second: 0.863
+      second: 0.38
     - first:
         name: _Mode
       second: 3
@@ -104,13 +163,16 @@ Material:
       second: 1
     - first:
         name: _Parallax
-      second: 0.02
+      second: 0.005
+    - first:
+        name: _Shininess
+      second: 0.03
     - first:
         name: _SmoothnessTextureChannel
-      second: 1
+      second: 0
     - first:
         name: _SpecularHighlights
-      second: 0
+      second: 1
     - first:
         name: _SrcBlend
       second: 1
@@ -123,7 +185,10 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 1, g: 1, b: 1, a: 0.928}
+      second: {r: 1, g: 1, b: 1, a: 0.953}
     - first:
         name: _EmissionColor
-      second: {r: 0.4852941, g: 0.46388406, b: 0.46388406, a: 1}
+      second: {r: 0.36764705, g: 0.36764705, b: 0.36764705, a: 1}
+    - first:
+        name: _SpecColor
+      second: {r: 0, g: 0, b: 0, a: 1}

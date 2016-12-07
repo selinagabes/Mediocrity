@@ -8,7 +8,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: Tooth
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _EMISSION
+  m_ShaderKeywords: _EMISSION _GLOSSYREFLECTIONS_OFF _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -69,13 +69,19 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - first:
+        name: _SpecGlossMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - first:
         name: _BumpScale
       second: 1
     - first:
         name: _Cutoff
-      second: 0.5
+      second: 0.631
     - first:
         name: _DetailNormalMapScale
       second: 1
@@ -84,16 +90,16 @@ Material:
       second: 0
     - first:
         name: _GlossMapScale
-      second: 1
+      second: 0.386
     - first:
         name: _Glossiness
-      second: 0.5
+      second: 0.455
     - first:
         name: _GlossyReflections
-      second: 1
+      second: 0
     - first:
         name: _Metallic
-      second: 0
+      second: 0.48
     - first:
         name: _Mode
       second: 0
@@ -105,7 +111,7 @@ Material:
       second: 0.02
     - first:
         name: _SmoothnessTextureChannel
-      second: 0
+      second: 1
     - first:
         name: _SpecularHighlights
       second: 1
@@ -125,3 +131,6 @@ Material:
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}
+    - first:
+        name: _SpecColor
+      second: {r: 0.051470578, g: 0.048821356, b: 0.048821356, a: 0.534}

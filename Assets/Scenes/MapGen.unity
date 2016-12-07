@@ -101,7 +101,7 @@ GameObject:
   - 23: {fileID: 122775415}
   - 33: {fileID: 122775414}
   m_Layer: 0
-  m_Name: PlatformMesh
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -233,7 +233,7 @@ GameObject:
   - 33: {fileID: 297766352}
   - 23: {fileID: 297766353}
   m_Layer: 0
-  m_Name: Level Mesh
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -362,7 +362,7 @@ GameObject:
   - 33: {fileID: 454773062}
   - 23: {fileID: 454773063}
   m_Layer: 0
-  m_Name: ForegroundDepth
+  m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -445,10 +445,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0057b974711799d48b4483807c3718c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Walls: {fileID: 2052922836}
+  Floor: {fileID: 122775414}
   wallHeight: 5
   tileSize: 4
-  Floor: {fileID: 122775414}
+  Walls: {fileID: 2052922836}
 --- !u!114 &537910503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,6 +507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a283f1c8aa2d7d144aeb6a84f6a621bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Tooth: {fileID: 1000014281198998, guid: dccba23618ab70a49a3e72a85ae1cad5, type: 2}
 --- !u!4 &539469021
 Transform:
   m_ObjectHideFlags: 0
@@ -531,7 +532,7 @@ GameObject:
   - 33: {fileID: 549877650}
   - 23: {fileID: 549877651}
   m_Layer: 0
-  m_Name: HorizonDepth
+  m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -586,6 +587,72 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1031613594}
   m_RootOrder: 1
+--- !u!1 &772471104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 772471105}
+  - 33: {fileID: 772471107}
+  - 23: {fileID: 772471106}
+  m_Layer: 0
+  m_Name: Walls
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &772471105
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 772471104}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 270, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1664154826}
+  m_RootOrder: 1
+--- !u!23 &772471106
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 772471104}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 3863804de918f174e911e32c7813ab75, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!33 &772471107
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 772471104}
+  m_Mesh: {fileID: 0}
 --- !u!1 &801936753
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,7 +815,7 @@ GameObject:
   - 33: {fileID: 930903560}
   - 23: {fileID: 930903561}
   m_Layer: 0
-  m_Name: ForeGroundMesh
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -831,10 +898,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0057b974711799d48b4483807c3718c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Walls: {fileID: 549877650}
-  wallHeight: 5
-  tileSize: 50
   Floor: {fileID: 1863859124}
+  wallHeight: 5
+  tileSize: 3
+  Walls: {fileID: 549877650}
 --- !u!114 &1031613593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -894,10 +961,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0057b974711799d48b4483807c3718c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Walls: {fileID: 243915521}
+  Floor: {fileID: 297766352}
   wallHeight: 5
   tileSize: 4
-  Floor: {fileID: 297766352}
+  Walls: {fileID: 243915521}
 --- !u!114 &1338408138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -940,7 +1007,7 @@ GameObject:
   - 33: {fileID: 1378423384}
   - 23: {fileID: 1378423385}
   m_Layer: 0
-  m_Name: HorizonMesh
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -966,7 +1033,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: f55adede80aa6ee4da3780371cfd7234, type: 2}
+  - {fileID: 2100000, guid: 3863804de918f174e911e32c7813ab75, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -1023,10 +1090,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0057b974711799d48b4483807c3718c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Walls: {fileID: 0}
-  wallHeight: 0
-  tileSize: 4
   Floor: {fileID: 1378423384}
+  wallHeight: 5
+  tileSize: 5
+  Walls: {fileID: 772471107}
 --- !u!114 &1664154825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1042,7 +1109,7 @@ MonoBehaviour:
   height: 50
   seed: Horizon
   useRandomSeed: 1
-  randomFillPercent: 100
+  randomFillPercent: 75
 --- !u!4 &1664154826
 Transform:
   m_ObjectHideFlags: 0
@@ -1055,6 +1122,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1378423386}
+  - {fileID: 772471105}
   m_Father: {fileID: 0}
   m_RootOrder: 9
 --- !u!1 &1731579165
@@ -1089,7 +1157,7 @@ MonoBehaviour:
   height: 50
   seed: Fore1
   useRandomSeed: 1
-  randomFillPercent: 16
+  randomFillPercent: 29
 --- !u!4 &1731579167
 Transform:
   m_ObjectHideFlags: 0
@@ -1097,7 +1165,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1731579165}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1116,10 +1184,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0057b974711799d48b4483807c3718c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Walls: {fileID: 454773062}
-  wallHeight: 5
-  tileSize: -1
   Floor: {fileID: 930903560}
+  wallHeight: 0
+  tileSize: 10
+  Walls: {fileID: 454773062}
 --- !u!1 &1735826546
 GameObject:
   m_ObjectHideFlags: 0
@@ -1202,7 +1270,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1735826546}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25, y: -12, z: -30}
+  m_LocalPosition: {x: -20, y: -10, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -1230,7 +1298,7 @@ GameObject:
   - 33: {fileID: 1863859124}
   - 23: {fileID: 1863859125}
   m_Layer: 0
-  m_Name: HorizonMesh
+  m_Name: Floors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1296,7 +1364,7 @@ GameObject:
   - 33: {fileID: 2052922836}
   - 23: {fileID: 2052922837}
   m_Layer: 0
-  m_Name: Platforms
+  m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

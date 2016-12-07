@@ -7,9 +7,8 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Cave
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _EMISSION _GLOSSYREFLECTIONS_OFF _METALLICGLOSSMAP _NORMALMAP
-    _PARALLAXMAP _SPECULARHIGHLIGHTS_OFF
+  m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _EMISSION _METALLICGLOSSMAP _PARALLAXMAP _SPECGLOSSMAP
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -19,7 +18,7 @@ Material:
     - first:
         name: _BumpMap
       second:
-        m_Texture: {fileID: 2800000, guid: 25e80e757a7a18f4abc721659bdd6a7d, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -73,7 +72,7 @@ Material:
     - first:
         name: _SpecGlossMap
       second:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 25e80e757a7a18f4abc721659bdd6a7d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -82,7 +81,7 @@ Material:
       second: 1
     - first:
         name: _Cutoff
-      second: 0.5
+      second: 0.47
     - first:
         name: _DetailNormalMapScale
       second: 1
@@ -91,13 +90,13 @@ Material:
       second: 0
     - first:
         name: _GlossMapScale
-      second: 0
+      second: 0.42
     - first:
         name: _Glossiness
       second: 1
     - first:
         name: _GlossyReflections
-      second: 0
+      second: 1
     - first:
         name: _Metallic
       second: 1
@@ -106,16 +105,16 @@ Material:
       second: 0
     - first:
         name: _OcclusionStrength
-      second: 1
+      second: 0.9
     - first:
         name: _Parallax
-      second: 0.02
+      second: 0.005
     - first:
         name: _SmoothnessTextureChannel
       second: 0
     - first:
         name: _SpecularHighlights
-      second: 0
+      second: 1
     - first:
         name: _SrcBlend
       second: 1
@@ -131,7 +130,7 @@ Material:
       second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _EmissionColor
-      second: {r: 1, g: 1, b: 1, a: 1}
+      second: {r: 0, g: 0.24061875, b: 0.47794116, a: 1}
     - first:
         name: _SpecColor
       second: {r: 0, g: 0, b: 0, a: 1}
