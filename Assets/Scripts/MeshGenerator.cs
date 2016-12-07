@@ -2,25 +2,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 public class MeshGenerator : MonoBehaviour
 {
     public MeshFilter Walls;
     public SquareGrid squareGrid;
+    public float wallHeight; 
     public int tileSize = -1;
     public MeshFilter Floor;
     List<Vector3> vertices;
+    List<Vector3> wallVertices;
     List<int> triangles;
     Dictionary<int, List<Triangle>> triangleDictionary = new Dictionary<int, List<Triangle>>();
     List<List<int>> outlines = new List<List<int>>();
-    HashSet<int> checkedVertices = new HashSet<int>(); 
-    
+    HashSet<int> checkedVertices = new HashSet<int>();
+
     public void GenerateMesh(int[,] map, float squareSize)
     {
         triangleDictionary.Clear();
         outlines.Clear();
         checkedVertices.Clear();
-          
+        // wallVertices.Clear();
+
         squareGrid = new SquareGrid(map, squareSize);
 
         vertices = new List<Vector3>();
@@ -40,35 +44,55 @@ public class MeshGenerator : MonoBehaviour
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangles.ToArray();
         mesh.RecalculateNormals();
-        if(tileSize == -1)
-             tileSize = 10;
+        if (tileSize == -1)
+            tileSize = 10;
         Vector2[] uvs = new Vector2[vertices.Count];
         for (int i = 0; i < vertices.Count; i++)
         {
-            float percentX = Mathf.InverseLerp(-map.GetLength(0) * squareSize / 2f, map.GetLength(0) * squareSize / 2f, vertices[i].x)*tileSize;
-            float percentY = Mathf.InverseLerp(-map.GetLength(0) * squareSize / 2f, map.GetLength(0) * squareSize / 2f, vertices[i].z)*tileSize;
+            float percentX = Mathf.InverseLerp(-map.GetLength(0) * squareSize / 2f, map.GetLength(0) * squareSize / 2f, vertices[i].x) * tileSize;
+            float percentY = Mathf.InverseLerp(-map.GetLength(0) * squareSize / 2f, map.GetLength(0) * squareSize / 2f, vertices[i].z) * tileSize;
             uvs[i] = new Vector2(percentX, percentY);
         }
         mesh.uv = uvs;
         CreateWallMesh();
+        Vector3 min = GetMinimumVertex();
+        Debug.Log(min);
+    }
+
+    public Vector3 GetMinimumVertex()
+    {
+
+        Vector3 minimumVertex = wallVertices[0];
+        for (int i = 0; i < wallVertices.Count; i++)
+        {
+            if (wallVertices[i].z < minimumVertex.z)
+                minimumVertex = wallVertices[i];
+        }
+        foreach (var wall in wallVertices.Where(w => w.x <= minimumVertex.x && w.z <= minimumVertex.z + 5)) 
+        {
+            if (wall.x <= minimumVertex.x )
+                minimumVertex = wall;
+        }
+
+        return minimumVertex;
     }
 
     private void CreateWallMesh()
     {
         CalculateMeshOutlines();
-        List<Vector3> wallVertices = new List<Vector3>();
+        wallVertices = new List<Vector3>();
         List<int> wallTriangles = new List<int>();
         Mesh wallMesh = new Mesh();
-        float wallHeight = 4;
+         wallHeight = 4;
         foreach (List<int> outline in outlines)
         {
-            for (int i = 0; i < outline.Count-1; i++)
+            for (int i = 0; i < outline.Count - 1; i++)
             {
                 int startIndex = wallVertices.Count;
                 wallVertices.Add(vertices[outline[i]]);                                //left vertex
-                wallVertices.Add(vertices[outline[i+1]]);                              //right vertex
+                wallVertices.Add(vertices[outline[i + 1]]);                              //right vertex
                 wallVertices.Add(vertices[outline[i]] - Vector3.up * wallHeight);      //bottom left vertex
-                wallVertices.Add(vertices[outline[i+1]] - Vector3.up * wallHeight);    //bottom right vertex
+                wallVertices.Add(vertices[outline[i + 1]] - Vector3.up * wallHeight);    //bottom right vertex
 
                 wallTriangles.Add(startIndex + 0);                                      //left
                 wallTriangles.Add(startIndex + 2);                                      //bottom left
@@ -78,7 +102,7 @@ public class MeshGenerator : MonoBehaviour
                 wallTriangles.Add(startIndex + 1);                                      //top right
                 wallTriangles.Add(startIndex + 0);                                      //left 
 
-               
+
             }
         }
         wallMesh.vertices = wallVertices.ToArray();
@@ -151,7 +175,7 @@ public class MeshGenerator : MonoBehaviour
                 checkedVertices.Add(square.topRight.vertexIndex);
                 checkedVertices.Add(square.bottomRight.vertexIndex);
                 checkedVertices.Add(square.bottomLeft.vertexIndex);
-                break; 
+                break;
         }
     }
 
@@ -218,7 +242,7 @@ public class MeshGenerator : MonoBehaviour
                     newOutline.Add(vertexIndex);
 
                     outlines.Add(newOutline);
-                    FollowOutline(newOutlineVertex, outlines.Count-1);
+                    FollowOutline(newOutlineVertex, outlines.Count - 1);
                     outlines[outlines.Count - 1].Add(vertexIndex);
                 }
             }

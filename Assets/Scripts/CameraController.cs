@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class CameraController : MonoBehaviour
 {
 
-    public GameObject player;
+   GameObject player;
     private Vector3 offset;
     // Use this for initialization
     void Start()
     {
+        player = GameObject.FindGameObjectsWithTag("Player").First(p => p.activeSelf);
         offset = transform.position - player.transform.position;
     }
 

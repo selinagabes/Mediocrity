@@ -13,11 +13,11 @@ public class MapGenerator : MonoBehaviour
     public int randomFillPercent;
     int[,] _map;
     //grid of integers, tile = 0 (Empty), tile = 1(Wall)
-
-    void Start()
+    void Awake()
     {
         GenerateMap();
     }
+    
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
