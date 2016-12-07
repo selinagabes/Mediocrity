@@ -22,4 +22,15 @@ public class PlayerController : MonoBehaviour
     {
         rigidbody.MovePosition(rigidbody.position + velocity * Time.fixedDeltaTime);
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+      
+        if (other.gameObject.CompareTag("Tooth"))
+        {
+            other.gameObject.SetActive(false);
+        }
+
+    }
+
 }
