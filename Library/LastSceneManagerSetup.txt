@@ -1,4 +1,4 @@
 sceneSetups:
-- path: C:/Users/selinagabes/Documents/Unity/A5 - Selina Gabriele/Assets/Scenes/MainMenu.unity
+- path: C:/Users/selinagabes/Documents/Unity/A3 - Selina Gabriele/Assets/Scenes/MainMenu.unity
   isLoaded: 1
   isActive: 1
