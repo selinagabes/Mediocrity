@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour
+public class SinglePlayerController : MonoBehaviour
 {
-    Rigidbody rigidbody;
-    Vector3 velocity;
+    private Rigidbody rigidbody;
+    private Vector3 velocity;
 
     // Use this for initialization
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();      
-        
     }
     
     // Update is called once per frame

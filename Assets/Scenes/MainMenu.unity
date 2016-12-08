@@ -365,7 +365,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Gradma's House
+  m_Text: Single Player
 --- !u!222 &374842982
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2329,7 +2329,7 @@ GameObject:
   - 114: {fileID: 1036200448}
   - 114: {fileID: 1036200447}
   m_Layer: 5
-  m_Name: PanicButton
+  m_Name: OptionsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2463,7 +2463,7 @@ GameObject:
   - 114: {fileID: 1165705022}
   - 114: {fileID: 1165705021}
   m_Layer: 5
-  m_Name: LibraryButton
+  m_Name: MultiplayerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2968,7 +2968,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Leddy Library
+  m_Text: Multiplayer
 --- !u!222 &1663881301
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3135,7 +3135,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Naked in Public
+  m_Text: Options
 --- !u!222 &1715397745
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3229,7 +3229,7 @@ GameObject:
   - 114: {fileID: 1888604091}
   - 114: {fileID: 1888604094}
   m_Layer: 5
-  m_Name: GradmaButton
+  m_Name: SinglePlayerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
