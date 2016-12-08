@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< Updated upstream
 - path: C:/Users/selinagabes/Documents/Unity/A5 - Selina Gabriele/Assets/Scenes/MainMenu.unity
+=======
+- path: Assets/Scenes/MapGen.unity
+>>>>>>> Stashed changes
   isLoaded: 1
   isActive: 1
