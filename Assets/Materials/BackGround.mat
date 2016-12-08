@@ -8,8 +8,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: BackGround
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _EMISSION _GLOSSYREFLECTIONS_OFF _METALLICGLOSSMAP
-    _PARALLAXMAP _SPECULARHIGHLIGHTS_OFF
+  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _EMISSION _GLOSSYREFLECTIONS_OFF _SPECULARHIGHLIGHTS_OFF
   m_LightmapFlags: 1
   m_CustomRenderQueue: 3000
   stringTagMap:
@@ -44,13 +43,13 @@ Material:
     - first:
         name: _EmissionMap
       second:
-        m_Texture: {fileID: 2800000, guid: 778d42dc11de9e348b256ae212ef5f66, type: 3}
+        m_Texture: {fileID: 2800000, guid: f577258cefaa3fd4196955c474f98e57, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: 778d42dc11de9e348b256ae212ef5f66, type: 3}
+        m_Texture: {fileID: 2800000, guid: f577258cefaa3fd4196955c474f98e57, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -62,7 +61,7 @@ Material:
     - first:
         name: _OcclusionMap
       second:
-        m_Texture: {fileID: 2800000, guid: 778d42dc11de9e348b256ae212ef5f66, type: 3}
+        m_Texture: {fileID: 2800000, guid: f577258cefaa3fd4196955c474f98e57, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -95,7 +94,7 @@ Material:
       second: 0
     - first:
         name: _Metallic
-      second: 1
+      second: 0
     - first:
         name: _Mode
       second: 3
@@ -123,7 +122,7 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 1, g: 1, b: 1, a: 1}
+      second: {r: 0, g: 0, b: 0, a: 0.597}
     - first:
         name: _EmissionColor
-      second: {r: 0.077962786, g: 0.09260528, b: 0.102941155, a: 1}
+      second: {r: 0, g: 0, b: 0, a: 1}
