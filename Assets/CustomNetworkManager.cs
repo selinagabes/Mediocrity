@@ -2,38 +2,41 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using System;
 
 public class CustomNetworkManager : NetworkManager {
 
-	public void StartupHost()
+	public void CreateHost()
 	{
 		SetPort ();
-		NetworkManager.singleton.StartHost ();
+		singleton.StartHost ();
 	}
 
-	public void JoinGame()
+	public void ConnectToHost()
 	{
-		SetIPAddress ();
-		SetPort ();
-		NetworkManager.singleton.StartClient ();
-	}
-
-	void SetIPAddress()
-	{
-		string ipAddress = GameObject.Find ("InputIP").transform.FindChild ("Text").GetComponent<Text> ().text;
-		NetworkManager.singleton.networkAddress = ipAddress;
+        SetPort();
+        singleton.networkAddress = GameObject.Find("inputIP").transform.FindChild("Text").GetComponent<Text>().text;
+        Debug.Log(GameObject.Find("inputIP").transform.FindChild("Text").GetComponent<Text>().text);
+		try
+        {
+            singleton.StartClient();
+        }
+        catch
+        {
+            Debug.Log("nope");
+        }
 	}
 			
 	void SetPort()
 	{
-		NetworkManager.singleton.networkPort = 7777;
+		singleton.networkPort = 7777;
 	}
 
 	void OnLevelWasLoaded(int level)
 	{
 		if (level == 2) 
 		{
-			SetUpConnectionSceneButtons ();
+			StartCoroutine(SetUpConnectionSceneButtons());
 		} 
 		else 
 		{
@@ -41,12 +44,13 @@ public class CustomNetworkManager : NetworkManager {
 		}
 	}
 
-	void SetUpConnectionSceneButtons()
+	IEnumerator SetUpConnectionSceneButtons()
 	{
+        yield return new WaitForSeconds(0.5f);
 		GameObject.Find ("HostButton").GetComponent<Button> ().onClick.RemoveAllListeners ();
-		GameObject.Find("HostButton").GetComponent<Button> ().onClick.AddListener (StartupHost);
+		GameObject.Find("HostButton").GetComponent<Button> ().onClick.AddListener (CreateHost);
 		GameObject.Find ("JoinButton").GetComponent<Button> ().onClick.RemoveAllListeners ();
-		GameObject.Find("JoinButton").GetComponent<Button> ().onClick.AddListener (JoinGame);
+		GameObject.Find("JoinButton").GetComponent<Button> ().onClick.AddListener (ConnectToHost);
 	}
 
 	void SetUpPlaySceneButtons()
