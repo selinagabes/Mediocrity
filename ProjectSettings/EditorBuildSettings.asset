@@ -17,3 +17,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Panic.unity
   - enabled: 1
     path: Assets/Scenes/MapGen.unity
+  - enabled: 1
+    path: Assets/Scenes/NetworkPanic.unity
