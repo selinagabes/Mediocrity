@@ -490,8 +490,8 @@ GameObject:
   - 4: {fileID: 539469021}
   - 114: {fileID: 539469020}
   m_Layer: 0
-  m_Name: GameController
-  m_TagString: Untagged
+  m_Name: SpawnController
+  m_TagString: Spawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -507,7 +507,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a283f1c8aa2d7d144aeb6a84f6a621bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Death: {fileID: 1000013782255974, guid: fc255f4d819863e47aae029915a148c2, type: 2}
   Tooth: {fileID: 1000014281198998, guid: dccba23618ab70a49a3e72a85ae1cad5, type: 2}
+  TeethStairs: {fileID: 1000010575864000, guid: e983414de7ce66f48b6a93273db1242b,
+    type: 2}
+  Stairs: {fileID: 1000013568442226, guid: 007b54b57be4f9744ab8d95880de4235, type: 2}
 --- !u!4 &539469021
 Transform:
   m_ObjectHideFlags: 0
@@ -1117,7 +1121,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1664154823}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 15}
+  m_LocalPosition: {x: 0, y: 0, z: 12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:

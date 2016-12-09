@@ -81,6 +81,24 @@ public class MeshGenerator : MonoBehaviour
         return minimumVertex;
     }
 
+    public Vector3 GetMaximumVertex()
+    {
+
+        Vector3 minimumVertex = wallVertices[0];
+        for (int i = 0; i < wallVertices.Count; i++)
+        {
+            if (wallVertices[i].z < minimumVertex.z)
+                minimumVertex = wallVertices[i];
+        }
+        foreach (var wall in wallVertices.Where(w => w.x >= minimumVertex.x && w.z <= minimumVertex.z + 5))
+        {
+            if (wall.x >= minimumVertex.x)
+                minimumVertex = wall;
+        }
+
+        return minimumVertex;
+    }
+
     private void CreateWallMesh()
     {
         CalculateMeshOutlines();

@@ -30,6 +30,11 @@ public class PlayerController : MonoBehaviour
         {
             other.gameObject.SetActive(false);
         }
+        if (other.gameObject.CompareTag("Death"))
+        {
+            Debug.Log("You dead");
+            //other.gameObject.SetActive(false);
+        }
 
     }
 

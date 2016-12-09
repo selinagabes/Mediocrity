@@ -17,7 +17,7 @@ public class InstantiatePlayer : MonoBehaviour {
        
         GameObject path = GameObject.FindGameObjectWithTag("LevelPath");
         Vector3 inverseSpawnPoint = path.GetComponentInChildren<MeshGenerator>().GetMinimumVertex();
-        spawnPoint = new Vector3(inverseSpawnPoint.x, inverseSpawnPoint.z+1, path.GetComponentInChildren<MeshGenerator>().wallHeight/2);
+        spawnPoint = new Vector3(inverseSpawnPoint.x+5, inverseSpawnPoint.z+1, path.GetComponentInChildren<MeshGenerator>().wallHeight/2);
        // Debug.Log(spawnPoint);      
         PlayerOne = (GameObject)Instantiate(PlayerOne, spawnPoint, new Quaternion());
            
@@ -26,7 +26,7 @@ public class InstantiatePlayer : MonoBehaviour {
     }
     void SpawnPlayerTwo()
     {
-        Vector3 spawnPt = new Vector3(spawnPoint.x +5, spawnPoint.y, spawnPoint.z);
+        Vector3 spawnPt = new Vector3(spawnPoint.x +10, spawnPoint.y, spawnPoint.z);
         PlayerTwo = (GameObject)Instantiate(PlayerOne, spawnPt, new Quaternion());
         PlayerTwo.SetActive(true);
     }

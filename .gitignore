@@ -11,6 +11,9 @@ ExportedObj/
 *.csproj
 *.unityproj
 *.sln
+*.log
+*.dll
+*.mdb
 *.suo
 *.tmp
 *.user

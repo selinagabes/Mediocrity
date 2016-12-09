@@ -6,6 +6,9 @@ TagManager:
   tags:
   - LevelPath
   - Tooth
+  - MiddleStep
+  - Death
+  - Spawn
   layers:
   - Default
   - TransparentFX
