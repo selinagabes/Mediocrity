@@ -7,11 +7,14 @@ public class SpawnController : MonoBehaviour
     List<Vector3> path = new List<Vector3>();
     Dictionary<Vector3, GameObject> ToothSpawns= new Dictionary<Vector3, GameObject>();
     Dictionary<Vector3, GameObject> StairSpawns = new Dictionary<Vector3, GameObject>();
+    Dictionary<Vector3, GameObject> PortalSpawns = new Dictionary<Vector3, GameObject>();
+
     Vector3 minVertex;
     public GameObject Death;
     public GameObject Tooth;
     public GameObject TeethStairs;
     public GameObject Stairs;
+    public GameObject Portal;
 
     // Use this for initialization
     void Start()
@@ -30,7 +33,18 @@ public class SpawnController : MonoBehaviour
 
         PlaceTeeth();
         PlaceStairs();
+        PlacePortal();
         ReadjustMap();
+    }
+    void PlacePortal()
+    {
+        MeshGenerator meshGen = GameObject.FindGameObjectWithTag("LevelPath").GetComponent<MeshGenerator>();
+        Vector3 maxVertex = meshGen.GetMaximumVertex();
+        List<Vector3> beforeWallPath = path.Where(p => p.x >= maxVertex.x-6 & p.z <= maxVertex.z+5).ToList();
+        maxVertex = beforeWallPath.First();
+        Vector3 spawnPoint = new Vector3(maxVertex.x, maxVertex.z+1, 2.5f);
+        GameObject portalSpawn = (GameObject)Instantiate(Portal, spawnPoint, new Quaternion());
+        PortalSpawns.Add(spawnPoint, portalSpawn);
     }
     void PlaceTeeth()
     {
@@ -92,8 +106,10 @@ public class SpawnController : MonoBehaviour
 
         while (spawnPoint.x >= meshGen.GetMaximumVertex().x -spacing+5     //if it's too far ahead
             || spawns.ContainsKey(spawnPoint)
-            || spawns.Any(s => s.Key.x >= spawnPoint.x - spacing && s.Key.x <= spawnPoint.x + spacing)   //or it's too close to other stairs
-            || (spawnPoint.x <= minVertex.x+spacing+5))        //or its too soon
+            || PortalSpawns.Any(p=>p.Key.x <= spawnPoint.x+spacing)     //or it's too close to the portal
+            || spawns.Any(s => s.Key.x >= spawnPoint.x - spacing        
+                                && s.Key.x <= spawnPoint.x + spacing)   //or it's too close to other instantiations
+            || (spawnPoint.x <= minVertex.x+spacing+5))                 //or its too soon
         {
             index = Random.Range(min, max);
             spawnPoint = new Vector3(path[index].x, path[index].z + 1,3);

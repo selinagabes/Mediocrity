@@ -512,6 +512,7 @@ MonoBehaviour:
   TeethStairs: {fileID: 1000010575864000, guid: e983414de7ce66f48b6a93273db1242b,
     type: 2}
   Stairs: {fileID: 1000013568442226, guid: 007b54b57be4f9744ab8d95880de4235, type: 2}
+  Portal: {fileID: 1000012187557636, guid: 39a2bdd54fe845849978325840945c91, type: 2}
 --- !u!4 &539469021
 Transform:
   m_ObjectHideFlags: 0
