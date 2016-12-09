@@ -4,15 +4,23 @@ using System.Linq;
 
 public class GameController : MonoBehaviour {
     List<Vector3> path;
+    Dictionary<Vector3, GameObject> ToothSpawns;
+    Dictionary<Vector3, GameObject> StairSpawns;
     Vector3 minVertex;
     public GameObject Tooth;
+    public GameObject TeethStairs;
+    public GameObject Stairs;
+   
 	// Use this for initialization
 	void Start () {
         MeshGenerator meshGen = GameObject.FindGameObjectWithTag("LevelPath").GetComponent<MeshGenerator>();
         minVertex = meshGen.GetMinimumVertex();
         path = meshGen.GetWalls().Where(w=>w.z <= minVertex.z+5 && w.x > minVertex.x).OrderBy(w=>w.x).ToList();
-        
-        PlaceTeeth();        
+        > ToothSpawns = new Dictionary<Vector3, GameObject;
+        > StairSpawns = new Dictionary<Vector3, GameObject;
+        PlaceTeeth();
+        PlaceStairs();
+        ReadjustMap();  
 	}
 	
     void PlaceTeeth()
@@ -36,7 +44,25 @@ public class GameController : MonoBehaviour {
         }
     }
 	// Update is called once per frame
-	void Update () {
-	
-	}
+	void PlaceStairs () {
+        MeshGenerator meshGen = GameObject.FindGameObjectWithTag("LevelPath").GetComponent<MeshGenerator>();
+
+        int numOfVertexes = path.Count;
+        int min = (int)minVertex.x +10;
+        int max = numOfVertexes / 3;
+        int index = Random.Range(min, max);
+
+        for (int i = 1; i <= 3; i++)
+        {
+            Vector3 spawnPoint = new Vector3(path[index].x, path[index].z, 2.5);
+            Instantiate(Stairs, spawnPoint, new Quaternion());
+            min = max;
+            max += (numOfVertexes / 3);
+            index = Random.Range(min, max);
+        }
+    }
+    void ReadjustMap()
+    {
+
+    }
 }
