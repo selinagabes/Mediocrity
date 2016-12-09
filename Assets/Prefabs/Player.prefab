@@ -27,6 +27,7 @@ GameObject:
   - 114: {fileID: 114000010447449334}
   - 114: {fileID: 114000011390188010}
   - 114: {fileID: 114000014075292320}
+  - 114: {fileID: 114000010061283312}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -191,6 +192,24 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4280229743
+--- !u!114 &114000010061283312
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012174065354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 748f9db386b5cb04fb31e19aac4f8de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RayGun:
+    name: XYZ Dematerializer 5000
+    damage: 25
+    range: 50
+  mask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &114000010447449334
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -202,7 +221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3bb73d0b01bb140bb69c24408334a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  rigidbody: {fileID: 0}
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &114000010519037770
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -266,4 +286,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 066d7bb0061a14f4db0326f19921451a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNumber: 0
+  remoteLayerName: RemotePlayer
+  localLayerName: LocalPlayer
