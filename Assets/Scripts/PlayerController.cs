@@ -35,6 +35,10 @@ public class PlayerController : MonoBehaviour
             Debug.Log("You dead");
             //other.gameObject.SetActive(false);
         }
+        if (other.gameObject.CompareTag("EndZone"))
+        {
+            Debug.Log("New Zone");
+        }
 
     }
 

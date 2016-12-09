@@ -9,6 +9,7 @@ TagManager:
   - MiddleStep
   - Death
   - Spawn
+  - EndZone
   layers:
   - Default
   - TransparentFX
