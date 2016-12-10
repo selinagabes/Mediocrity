@@ -21,39 +21,68 @@ public class NetworkPlayer : NetworkBehaviour
     [SerializeField]
     private Behaviour[] disableWhenDead;
     private bool[] wasEnabled;
-    
-    public void Setup()
-    {
-        wasEnabled = new bool[disableWhenDead.Length];
-        for (int i = 0; i < wasEnabled.Length; i++)
-        {
-            wasEnabled[i] = disableWhenDead[i].enabled;
-        }
 
+    [SerializeField]
+    private GameObject deathEffect;
+
+    [SerializeField]
+    private GameObject spawnEffect;
+
+    private bool FirstSetup = true;
+
+    public void PlayerSetup()
+    {
+        //Broadcast the setup
+        CmdBroadcastNewPlayerSetup();
+    }
+
+    [Command]
+    private void CmdBroadcastNewPlayerSetup()
+    {
+        RpcSetupPlayerOnAllClients();
+    }
+
+    [ClientRpc]
+    private void RpcSetupPlayerOnAllClients()
+    {
+        if (FirstSetup)
+        {
+            wasEnabled = new bool[disableWhenDead.Length];
+            for (int i = 0; i < wasEnabled.Length; i++)
+            {
+                wasEnabled[i] = disableWhenDead[i].enabled;
+            }
+            FirstSetup = false;
+        }
         SetStatsAndStuff();
+    }
+
+    void Update()
+    {
+        if (isLocalPlayer)
+        {
+            if (Input.GetKeyDown(KeyCode.K))
+                RpcTakeDamage(9999);
+        }
     }
 
     public void SetStatsAndStuff()
     {
         isDead = false;
 
+        //Enable Functions
         for (int i = 0; i < disableWhenDead.Length; i++)
         {
             disableWhenDead[i].enabled = wasEnabled[i];
         }
 
-        Collider _col = GetComponent<Collider>();
-        if (_col != null)
-            _col.enabled = true;
-
-        Rigidbody _rb = GetComponent<Rigidbody>();
-        if (_rb != null)
-            _rb.useGravity = true;
-
+        //Enable Movement
         if(isLocalPlayer)
-        {
             GetComponent<NetworkPlayerMove>().enabled = true;
-        }
+
+        //Spawn Effect
+        GameObject _gfxIns = (GameObject)Instantiate(spawnEffect, transform.position, Quaternion.identity);
+        Destroy(_gfxIns, 3f);
 
         currentHealth = maxHealth;
     }
@@ -77,7 +106,7 @@ public class NetworkPlayer : NetworkBehaviour
     {
         isDead = true;
 
-        //Disable Stuff!
+        //Disable Components
         Debug.Log(transform.name + " is dead");
 
         for (int i = 0; i < disableWhenDead.Length; i++)
@@ -85,19 +114,13 @@ public class NetworkPlayer : NetworkBehaviour
             disableWhenDead[i].enabled = false;
         }
 
-
-        Collider _col = GetComponent<Collider>();
-        if (_col != null)
-            _col.enabled = false;
-
-        Rigidbody _rb = GetComponent<Rigidbody>();
-        if (_rb != null)
-            _rb.useGravity = false;
-
+        //Explode!
+        GameObject _gfxIns = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(_gfxIns, 3f);
+        
+        //Disable Movement
         if(isLocalPlayer)
-        {
             GetComponent<NetworkPlayerMove>().enabled = false;
-        }
 
         //Respawn
         StartCoroutine(Respawn());
@@ -105,13 +128,19 @@ public class NetworkPlayer : NetworkBehaviour
 
     IEnumerator Respawn()
     {
+        //Wait Determined Time To Respawn
         yield return new WaitForSeconds(NetworkGameManager.instance.matchSettings.respawnTime);
 
-        SetStatsAndStuff();
+        //Determine Spawn Point
+        Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
+        transform.position = _spawnPoint.position;
+        transform.rotation = _spawnPoint.rotation;
 
-        //Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
-        //transform.position = _spawnPoint.position;
-        //transform.rotation = _spawnPoint.rotation;
+        //Wait to make sure all transforms are correct (for particles)
+        yield return new WaitForSeconds(0.1f);
+
+        //Spawn
+        PlayerSetup();
 
         Debug.Log(transform.name + " Respawned!");
     }

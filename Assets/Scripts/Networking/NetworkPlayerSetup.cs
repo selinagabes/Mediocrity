@@ -11,13 +11,23 @@ public class NetworkPlayerSetup : NetworkBehaviour {
 	[SerializeField]
 	string localLayerName = "LocalPlayer";
 
+    [SerializeField]
+    GameObject playerUIprefab;
+    private GameObject playerUIInstance;
+
 	void Start () 
 	{
 		if (isLocalPlayer) 
 		{
-			this.GetComponentInChildren<TextMesh> ().text = "Player";
+            GetComponent<NetworkPlayer>().PlayerSetup();
+            this.GetComponentInChildren<TextMesh> ().text = "Player";
+
+            //Create Player UI
+            playerUIInstance = Instantiate(playerUIprefab);
+            playerUIInstance.name = playerUIprefab.name;
 		}
 
+        //Set Up Camera
 		SetupCamera ();
 
 		//Set up Layers
@@ -29,8 +39,6 @@ public class NetworkPlayerSetup : NetworkBehaviour {
 		{
 			AssignRemotePlayer ();
 		}
-
-        GetComponent<NetworkPlayer>().Setup();
 	}
 
 	public override void OnStartClient ()
@@ -46,9 +54,11 @@ public class NetworkPlayerSetup : NetworkBehaviour {
     void OnDisable()
     {
         NetworkGameManager.DeRegisterPlayer(transform.name);
+
+        Destroy(playerUIInstance);
     }
 
-	void SetupCamera()
+	public void SetupCamera()
 	{
 		if (isLocalPlayer)
 		{

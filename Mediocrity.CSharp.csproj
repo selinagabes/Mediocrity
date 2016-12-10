@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\Networking\NetworkPlayerMove.cs" />
     <Compile Include="Assets\Scripts\Networking\NetworkPlayerSetup.cs" />
     <Compile Include="Assets\Scripts\Networking\NetworkPlayerShoot.cs" />
+    <Compile Include="Assets\Scripts\Networking\NetworkPlayerUI.cs" />
     <Compile Include="Assets\Scripts\Networking\NetworkPlayerWeapon.cs" />
     <Compile Include="Assets\Scripts\QuitOnClick.cs" />
     <Compile Include="Assets\Scripts\SelectOnInput.cs" />
@@ -104,6 +105,10 @@
   <ItemGroup>
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\Fonts\OpenSans\License!.txt" />
+    <None Include="Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />
+    <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAdd.shader" />
+    <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAddSoft.shader" />
+    <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
     <None Include="Assets\Unity UI Sample\Fonts\Jupiter\LICENSE.txt" />
     <None Include="Assets\Unity UI Sample\Materials\UI-Default-No-Alpha.shader" />
     <None Include="Assets\Unity UI Sample\Textures and Sprites\SF UI\Background\LICENSE.txt" />

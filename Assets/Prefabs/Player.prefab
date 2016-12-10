@@ -291,6 +291,10 @@ MonoBehaviour:
   disableWhenDead:
   - {fileID: 114000012142216036}
   - {fileID: 114000010061283312}
+  deathEffect: {fileID: 1000011005725970, guid: b2c08edfe08f12e4aac26b1f17ba560b,
+    type: 2}
+  spawnEffect: {fileID: 1000013675947374, guid: ec05e689272bfb243af72308add346ce,
+    type: 2}
 --- !u!114 &114000014075292320
 MonoBehaviour:
   m_ObjectHideFlags: 1
