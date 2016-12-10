@@ -27,7 +27,7 @@ public class MapGenerator : MonoBehaviour
             //spawner.Spawn(); 
         }
     }
-    void GenerateMap()
+    public void GenerateMap()
     {
         _map = new int[width, height];
         RandomFillMap();

@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.4.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -77,6 +79,7 @@
     <Compile Include="Assets\Scripts\SoundManager.cs" />
     <Compile Include="Assets\Scripts\SpawnController.cs" />
     <Compile Include="Assets\Scripts\SpinIt.cs" />
+    <Compile Include="Assets\Scripts\ZoneGenerator.cs" />
     <Compile Include="Assets\Unity UI Sample\Scripts\ActiveStateToggler.cs" />
     <Compile Include="Assets\Unity UI Sample\Scripts\ApplicationManager.cs" />
     <Compile Include="Assets\Unity UI Sample\Scripts\ChangeColor.cs" />
@@ -90,7 +93,6 @@
     <Compile Include="Assets\Unity UI Sample\Scripts\TiltWindow.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Prefabs\Textures and Sprites\SF UI\Background\LICENSE.txt" />
     <None Include="Assets\Unity UI Sample\Fonts\Jupiter\LICENSE.txt" />
     <None Include="Assets\Unity UI Sample\Materials\UI-Default-No-Alpha.shader" />
   </ItemGroup>

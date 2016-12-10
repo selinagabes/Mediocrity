@@ -39,9 +39,10 @@ GameObject:
   - 33: {fileID: 33000013054469854}
   - 136: {fileID: 136000012754659360}
   - 23: {fileID: 23000012120188508}
+  - 114: {fileID: 114000013688398778}
   m_Layer: 0
   m_Name: Portal
-  m_TagString: Untagged
+  m_TagString: EndZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,6 +110,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012187557636}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114000013688398778
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012187557636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b2d29cb0a5dd7b44b94f6ef4cef4fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Zone: {fileID: 1000013337810796, guid: edd5730ce6a1cad42b406b1d8c36c9e0, type: 2}
 --- !u!136 &136000012754659360
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -116,7 +129,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012187557636}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2

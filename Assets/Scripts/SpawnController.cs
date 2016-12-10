@@ -26,14 +26,14 @@ public class SpawnController : MonoBehaviour
         ToothSpawns.Clear();
         StairSpawns.Clear();
         path.Clear();
-    
+        PortalSpawns.Clear();
+    //TODO:: Find a way to get this dude without haardcoding it
         MeshGenerator meshGen = GameObject.FindGameObjectWithTag("LevelPath").GetComponent<MeshGenerator>();
         minVertex = meshGen.GetMinimumVertex();
         path = meshGen.GetWalls().Where(w => w.z <= minVertex.z + 5 && w.x > minVertex.x).OrderBy(w => w.x).ToList();
-
-        PlaceTeeth();
-        PlaceStairs();
         PlacePortal();
+        PlaceTeeth();       
+        PlaceStairs();      
         ReadjustMap();
     }
     void PlacePortal()
@@ -106,7 +106,7 @@ public class SpawnController : MonoBehaviour
 
         while (spawnPoint.x >= meshGen.GetMaximumVertex().x -spacing+5     //if it's too far ahead
             || spawns.ContainsKey(spawnPoint)
-            || PortalSpawns.Any(p=>p.Key.x <= spawnPoint.x+spacing)     //or it's too close to the portal
+            || PortalSpawns.Any(p=>p.Key.x >= spawnPoint.x+spacing)     //or it's too close to the portal
             || spawns.Any(s => s.Key.x >= spawnPoint.x - spacing        
                                 && s.Key.x <= spawnPoint.x + spacing)   //or it's too close to other instantiations
             || (spawnPoint.x <= minVertex.x+spacing+5))                 //or its too soon

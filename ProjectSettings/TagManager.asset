@@ -10,6 +10,7 @@ TagManager:
   - Death
   - Spawn
   - EndZone
+  - Zone
   layers:
   - Default
   - TransparentFX
