@@ -25,7 +25,13 @@ public class NetworkPlayerSetup : NetworkBehaviour {
             //Create Player UI
             playerUIInstance = Instantiate(playerUIprefab);
             playerUIInstance.name = playerUIprefab.name;
-		}
+
+            //Configure UI
+            NetworkPlayerUI playerUI = playerUIInstance.GetComponent<NetworkPlayerUI>();
+            if (playerUI == null)
+                Debug.Log("No UI!");
+
+        }
 
         //Set Up Camera
 		SetupCamera ();

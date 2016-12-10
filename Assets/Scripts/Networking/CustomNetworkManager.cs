@@ -55,7 +55,6 @@ public class CustomNetworkManager : NetworkManager {
 
 	void SetUpPlaySceneButtons()
 	{
-		GameObject.Find ("BootButton").GetComponent<Button> ().onClick.RemoveAllListeners ();
-		GameObject.Find("BootButton").GetComponent<Button> ().onClick.AddListener (NetworkManager.singleton.StopHost);
+
 	}
 }

@@ -14,7 +14,8 @@ public class NetworkPlayerMove : MonoBehaviour {
 
 	void Update()
 	{
-		velocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0).normalized * 10;
+        if(!NetworkDCMenu.isOn)
+            velocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0).normalized * 10;
 	}
 
 	void FixedUpdate()

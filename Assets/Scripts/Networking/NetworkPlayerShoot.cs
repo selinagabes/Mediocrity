@@ -29,14 +29,18 @@ public class NetworkPlayerShoot : NetworkBehaviour {
 	{
 		if (isLocalPlayer) 
 		{
-			if (Input.GetKeyDown ("space")) {
-				if (CrossPlatformInputManager.GetAxis ("Horizontal") > 0)
-					dirRight = true;
-				else if (CrossPlatformInputManager.GetAxis ("Horizontal") < 0)
-					dirRight = false;
-			
-				FireTheLaser ();
-			}
+            if (!NetworkDCMenu.isOn)
+            {
+                if (Input.GetKeyDown("space"))
+                {
+                    if (CrossPlatformInputManager.GetAxis("Horizontal") > 0)
+                        dirRight = true;
+                    else if (CrossPlatformInputManager.GetAxis("Horizontal") < 0)
+                        dirRight = false;
+
+                    FireTheLaser();
+                }
+            }
 		}
 	}
 

@@ -308,3 +308,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   remoteLayerName: RemotePlayer
   localLayerName: LocalPlayer
+  playerUIprefab: {fileID: 1000013641412800, guid: 1cd60e0672a352f4a886a13430f0d0e0,
+    type: 2}
