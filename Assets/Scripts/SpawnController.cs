@@ -15,12 +15,14 @@ public class SpawnController : MonoBehaviour
     public GameObject TeethStairs;
     public GameObject Stairs;
     public GameObject Portal;
+ 
 
     // Use this for initialization
     void Start()
     {
         Spawn();
     }
+   
     public void Spawn()
     {
         ToothSpawns.Clear();
@@ -36,6 +38,7 @@ public class SpawnController : MonoBehaviour
         PlaceStairs();      
         ReadjustMap();
     }
+   
     void PlacePortal()
     {
         MeshGenerator meshGen = GameObject.FindGameObjectWithTag("LevelPath").GetComponent<MeshGenerator>();
@@ -51,9 +54,6 @@ public class SpawnController : MonoBehaviour
         MeshGenerator meshGen = GameObject.FindGameObjectWithTag("LevelPath").GetComponent<MeshGenerator>();
 
         int numOfVertices= path.Count;
-      
-
-
 
         for (int i = 1; i < 19; i++)
         {
@@ -67,7 +67,7 @@ public class SpawnController : MonoBehaviour
     // Update is called once per frame
     void PlaceStairs()
     {
-        MeshGenerator meshGen = GameObject.FindGameObjectWithTag("LevelPath").GetComponent<MeshGenerator>();
+      //  MeshGenerator meshGen = GameObject.FindGameObjectWithTag("LevelPath").GetComponent<MeshGenerator>();
         int numOfVertices = path.Count;
 
         int min = 10;
@@ -84,8 +84,7 @@ public class SpawnController : MonoBehaviour
             max += (numOfVertices / 3);
             index = Random.Range(min, max);
             index = index < numOfVertices ? index : index - (min / i);
-            if (path[index].x + 12 > meshGen.GetMaximumVertex().x)
-                index -= 12;
+        
         }
     }
     Vector3 GetSpawnPoint(int spacing, Dictionary<Vector3, GameObject> spawns)
@@ -104,9 +103,9 @@ public class SpawnController : MonoBehaviour
 
         //check if it is in range of another staircase
 
-        while (spawnPoint.x >= meshGen.GetMaximumVertex().x -spacing+5     //if it's too far ahead
+        while (spawnPoint.x >= meshGen.GetMaximumVertex().x -(spacing)*2     //if it's too far ahead
             || spawns.ContainsKey(spawnPoint)
-            || PortalSpawns.Any(p=>p.Key.x >= spawnPoint.x+spacing)     //or it's too close to the portal
+           // || PortalSpawns.Any(p=>p.Key.x <= spawnPoint.x+spacing)     //or it's too close to the portal
             || spawns.Any(s => s.Key.x >= spawnPoint.x - spacing        
                                 && s.Key.x <= spawnPoint.x + spacing)   //or it's too close to other instantiations
             || (spawnPoint.x <= minVertex.x+spacing+5))                 //or its too soon
@@ -114,7 +113,10 @@ public class SpawnController : MonoBehaviour
             index = Random.Range(min, max);
             spawnPoint = new Vector3(path[index].x, path[index].z + 1,3);
         }
-
+        if(PortalSpawns.Any(p => p.Key.x <= spawnPoint.x + spacing))
+        {
+            Debug.Log("suh");
+        }
         return spawnPoint;
     }
     void ReadjustMap()

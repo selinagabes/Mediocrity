@@ -79,22 +79,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1000011728104852
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 4000013367758432}
-  - 114: {fileID: 114000014223319630}
-  m_Layer: 0
-  m_Name: SpawnController
-  m_TagString: Spawn
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1000012474245516
 GameObject:
   m_ObjectHideFlags: 1
@@ -313,7 +297,6 @@ Transform:
   - {fileID: 4000010256979262}
   - {fileID: 4000013190690128}
   - {fileID: 4000012897567100}
-  - {fileID: 4000013367758432}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &4000010256979262
@@ -469,19 +452,6 @@ Transform:
   - {fileID: 4000013455027704}
   m_Father: {fileID: 4000010076031186}
   m_RootOrder: 3
---- !u!4 &4000013367758432
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011728104852}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 4000010076031186}
-  m_RootOrder: 5
 --- !u!4 &4000013455027704
 Transform:
   m_ObjectHideFlags: 1
@@ -909,6 +879,7 @@ MonoBehaviour:
   wallHeight: 5
   tileSize: 5
   Walls: {fileID: 33000010242310952}
+  wallVertices: []
 --- !u!114 &114000010541495170
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -940,6 +911,7 @@ MonoBehaviour:
   wallHeight: 0
   tileSize: 10
   Walls: {fileID: 33000013100697350}
+  wallVertices: []
 --- !u!114 &114000010894747496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -971,6 +943,7 @@ MonoBehaviour:
   wallHeight: 5
   tileSize: 4
   Walls: {fileID: 33000012750390430}
+  wallVertices: []
 --- !u!114 &114000011220403708
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1018,6 +991,7 @@ MonoBehaviour:
   wallHeight: 5
   tileSize: 4
   Walls: {fileID: 33000010717804052}
+  wallVertices: []
 --- !u!114 &114000013557979172
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1033,6 +1007,7 @@ MonoBehaviour:
   wallHeight: 5
   tileSize: 3
   Walls: {fileID: 33000010773828146}
+  wallVertices: []
 --- !u!114 &114000014138851858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1049,20 +1024,3 @@ MonoBehaviour:
   seed: Mediocrity
   useRandomSeed: 1
   randomFillPercent: 30
---- !u!114 &114000014223319630
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011728104852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a283f1c8aa2d7d144aeb6a84f6a621bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Death: {fileID: 1000013782255974, guid: fc255f4d819863e47aae029915a148c2, type: 2}
-  Tooth: {fileID: 1000014281198998, guid: dccba23618ab70a49a3e72a85ae1cad5, type: 2}
-  TeethStairs: {fileID: 1000010575864000, guid: e983414de7ce66f48b6a93273db1242b,
-    type: 2}
-  Stairs: {fileID: 1000013568442226, guid: 007b54b57be4f9744ab8d95880de4235, type: 2}
-  Portal: {fileID: 1000012187557636, guid: 39a2bdd54fe845849978325840945c91, type: 2}
