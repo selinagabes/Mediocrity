@@ -4,6 +4,6 @@
 public class NetworkPlayerWeapon {
 
 	public string name = "Raygun";
-	public float damage = 25f;
+	public int damage = 25;
 	public float range = 50f;
 }

@@ -61,21 +61,6 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>Library\UnityAssemblies\Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Mediocrity.CSharp.Plugins.csproj">
@@ -84,7 +69,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CustomNetworkManager.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
@@ -92,11 +76,14 @@
     <Compile Include="Assets\Scripts\LoadSceneOnClick.cs" />
     <Compile Include="Assets\Scripts\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\MeshGenerator.cs" />
-    <Compile Include="Assets\Scripts\NetworkGameManager.cs" />
-    <Compile Include="Assets\Scripts\NetworkMapGenerator.cs" />
-    <Compile Include="Assets\Scripts\NetworkPlayer.cs" />
-    <Compile Include="Assets\Scripts\NetworkPlayerMove.cs" />
-    <Compile Include="Assets\Scripts\PlayerManager.cs" />
+    <Compile Include="Assets\Scripts\Networking\CustomNetworkManager.cs" />
+    <Compile Include="Assets\Scripts\Networking\NetworkGameManager.cs" />
+    <Compile Include="Assets\Scripts\Networking\NetworkMatchSettings.cs" />
+    <Compile Include="Assets\Scripts\Networking\NetworkPlayer.cs" />
+    <Compile Include="Assets\Scripts\Networking\NetworkPlayerMove.cs" />
+    <Compile Include="Assets\Scripts\Networking\NetworkPlayerSetup.cs" />
+    <Compile Include="Assets\Scripts\Networking\NetworkPlayerShoot.cs" />
+    <Compile Include="Assets\Scripts\Networking\NetworkPlayerWeapon.cs" />
     <Compile Include="Assets\Scripts\QuitOnClick.cs" />
     <Compile Include="Assets\Scripts\SelectOnInput.cs" />
     <Compile Include="Assets\Scripts\SinglePlayerController.cs" />

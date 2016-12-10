@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine.Networking;
 
-public class NetworkPlayer : NetworkBehaviour {
+[RequireComponent(typeof(NetworkPlayer))]
+public class NetworkPlayerSetup : NetworkBehaviour {
 
 	[SerializeField]
 	string remoteLayerName = "RemotePlayer";
@@ -14,7 +15,6 @@ public class NetworkPlayer : NetworkBehaviour {
 	{
 		if (isLocalPlayer) 
 		{
-			GetComponent<NetworkPlayerMove> ().enabled = true;
 			this.GetComponentInChildren<TextMesh> ().text = "Player";
 		}
 
@@ -29,7 +29,24 @@ public class NetworkPlayer : NetworkBehaviour {
 		{
 			AssignRemotePlayer ();
 		}
+
+        GetComponent<NetworkPlayer>().Setup();
 	}
+
+	public override void OnStartClient ()
+	{
+		base.OnStartClient ();
+
+		string _netID = GetComponent<NetworkIdentity> ().netId.ToString();
+        NetworkPlayer _nPlayer = GetComponent<NetworkPlayer>();
+
+        NetworkGameManager.RegisterPlayer(_netID, _nPlayer);
+	}
+
+    void OnDisable()
+    {
+        NetworkGameManager.DeRegisterPlayer(transform.name);
+    }
 
 	void SetupCamera()
 	{
@@ -50,10 +67,5 @@ public class NetworkPlayer : NetworkBehaviour {
 	void AssignRemotePlayer()
 	{
 		gameObject.layer = LayerMask.NameToLayer (remoteLayerName);
-	}
-
-	void Update()
-	{
-		
 	}
 }

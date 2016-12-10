@@ -28,9 +28,10 @@ GameObject:
   - 114: {fileID: 114000011390188010}
   - 114: {fileID: 114000014075292320}
   - 114: {fileID: 114000010061283312}
+  - 114: {fileID: 114000012142216036}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -209,7 +210,7 @@ MonoBehaviour:
     range: 50
   mask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294967039
 --- !u!114 &114000010447449334
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -221,7 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3bb73d0b01bb140bb69c24408334a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody: {fileID: 0}
+  rigidbody: {fileID: 54000012796672078}
   velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &114000010519037770
 MonoBehaviour:
@@ -275,6 +276,21 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114000012142216036
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012174065354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea68a581030e1664b88a81acf3272fef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  disableWhenDead:
+  - {fileID: 114000012142216036}
+  - {fileID: 114000010061283312}
 --- !u!114 &114000014075292320
 MonoBehaviour:
   m_ObjectHideFlags: 1
