@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-
+﻿//==============================
+// Weapon Class!
+//==============================
 [System.Serializable]
 public class NetworkPlayerWeapon {
 

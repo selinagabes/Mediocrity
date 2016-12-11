@@ -2,6 +2,9 @@
 using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
 
+//=======================
+// Move the player!
+//=======================
 public class NetworkPlayerMove : MonoBehaviour {
 	
 	public Rigidbody rigidbody;

@@ -86,7 +86,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Networking\NetworkDCMenu.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
@@ -95,14 +94,15 @@
     <Compile Include="Assets\Scripts\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\MeshGenerator.cs" />
     <Compile Include="Assets\Scripts\Networking\CustomNetworkManager.cs" />
+    <Compile Include="Assets\Scripts\Networking\NetworkDCMenu.cs" />
     <Compile Include="Assets\Scripts\Networking\NetworkGameManager.cs" />
-    <Compile Include="Assets\Scripts\Networking\NetworkMatchSettings.cs" />
     <Compile Include="Assets\Scripts\Networking\NetworkPlayer.cs" />
     <Compile Include="Assets\Scripts\Networking\NetworkPlayerMove.cs" />
     <Compile Include="Assets\Scripts\Networking\NetworkPlayerSetup.cs" />
     <Compile Include="Assets\Scripts\Networking\NetworkPlayerShoot.cs" />
     <Compile Include="Assets\Scripts\Networking\NetworkPlayerUI.cs" />
     <Compile Include="Assets\Scripts\Networking\NetworkPlayerWeapon.cs" />
+    <Compile Include="Assets\Scripts\Networking\NetworkScoreboard.cs" />
     <Compile Include="Assets\Scripts\QuitOnClick.cs" />
     <Compile Include="Assets\Scripts\SelectOnInput.cs" />
     <Compile Include="Assets\Scripts\SinglePlayerController.cs" />

@@ -2,8 +2,32 @@
 using System.Collections;
 using UnityEngine.Networking;
 
+/*================================================
+NetowrkPlayer is our main player class.  no setup
+is done here, but rather everything that controls
+the player in game in done here.
+=================================================*/
 public class NetworkPlayer : NetworkBehaviour
 {
+    //========================================
+    // Local Stuff
+    //========================================
+    public int kills;
+    public int deaths;
+    public int maxHealth = 100;
+    [SerializeField]
+    private Behaviour[] disableWhenDead;
+    private bool[] wasEnabled;
+    public GameObject deathEffect;
+    public GameObject spawnEffect;
+    private bool FirstSetup = true;
+
+    //========================================
+    // Netowrk Stuff
+    //========================================
+    [SyncVar]
+    private int currentHealth;
+
     [SyncVar]
     private bool _isDead = false;
     public bool isDead
@@ -12,24 +36,11 @@ public class NetworkPlayer : NetworkBehaviour
         protected set { _isDead = value; }
     }
 
-    [SerializeField]
-    private int maxHealth = 100;
-
-    [SyncVar]
-    private int currentHealth;
-
-    [SerializeField]
-    private Behaviour[] disableWhenDead;
-    private bool[] wasEnabled;
-
-    [SerializeField]
-    private GameObject deathEffect;
-
-    [SerializeField]
-    private GameObject spawnEffect;
-
-    private bool FirstSetup = true;
-
+    //========================================
+    // Player Setup
+    // Call the server command, to tell the
+    // client to set stuff up!
+    //========================================
     public void PlayerSetup()
     {
         //Broadcast the setup
@@ -45,6 +56,12 @@ public class NetworkPlayer : NetworkBehaviour
     [ClientRpc]
     private void RpcSetupPlayerOnAllClients()
     {
+        //========================================
+        // Get the status of all things attached
+        // to the player the first time they spawn
+        // so we can can save it and re enable it
+        // on a respawn call
+        //========================================
         if (FirstSetup)
         {
             wasEnabled = new bool[disableWhenDead.Length];
@@ -61,11 +78,15 @@ public class NetworkPlayer : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
+            //This was used for testing.  I like to call it Zues's Hammer
             if (Input.GetKeyDown(KeyCode.K))
-                RpcTakeDamage(9999);
+                RpcTakeDamage(9999," ");
         }
     }
 
+    //====================================
+    // Enable everything we need on spawn
+    //====================================
     public void SetStatsAndStuff()
     {
         isDead = false;
@@ -88,7 +109,7 @@ public class NetworkPlayer : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RpcTakeDamage(int _amt)
+    public void RpcTakeDamage(int _amt, string _source)
     {
         if (isDead)
             return;
@@ -98,17 +119,29 @@ public class NetworkPlayer : NetworkBehaviour
 
         if (currentHealth <= 0)
         {
-            Killit();
+            Killit(_source);
         }
     }
 
-    private void Killit()
+    //====================================
+    // Disable everything on death
+    //====================================
+    private void Killit(string _source)
     {
         isDead = true;
 
-        //Disable Components
+        //Add a kill to the source of the raycast
+        NetworkPlayer sourcePlayer = NetworkGameManager.GetPlayer(_source);
+        if(sourcePlayer != null)
+        {
+            sourcePlayer.kills++;
+        }
+
+        deaths++;
+
         Debug.Log(transform.name + " is dead");
 
+        //Disable Components
         for (int i = 0; i < disableWhenDead.Length; i++)
         {
             disableWhenDead[i].enabled = false;
@@ -129,15 +162,15 @@ public class NetworkPlayer : NetworkBehaviour
     IEnumerator Respawn()
     {
         //Wait Determined Time To Respawn
-        yield return new WaitForSeconds(NetworkGameManager.instance.matchSettings.respawnTime);
+        yield return new WaitForSeconds(7f);
 
-        //Determine Spawn Point
+        //Determine Spawn Point (I have it set to Round Robin)
         Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
         transform.position = _spawnPoint.position;
         transform.rotation = _spawnPoint.rotation;
 
         //Wait to make sure all transforms are correct (for particles)
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
 
         //Spawn
         PlayerSetup();

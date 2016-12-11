@@ -3,15 +3,19 @@ using System.Collections;
 using UnityEngine.Networking;
 using UnityStandardAssets.CrossPlatformInput;
 
+/*==========================================
+This script controls player shooting over
+the network.
+==========================================*/
 public class NetworkPlayerShoot : NetworkBehaviour {
 
-	private const string PLAYER_TAG = "Player";
-	public NetworkPlayerWeapon RayGun;
+    //==================================
+    // All declarations are local
+    //==================================
+    public NetworkPlayerWeapon RayGun;
 	private bool dirRight = true;
-
 	[SerializeField]
 	private LayerMask mask;
-
 	private string _id;
 
 	void Start()
@@ -21,6 +25,7 @@ public class NetworkPlayerShoot : NetworkBehaviour {
 
 	void RegisterPlayer()
 	{
+        //What is our player going to be named
 		_id = "Player " + GetComponent<NetworkIdentity> ().netId;
 		transform.name = _id;
 	}
@@ -29,6 +34,7 @@ public class NetworkPlayerShoot : NetworkBehaviour {
 	{
 		if (isLocalPlayer) 
 		{
+            //Only show if the escape menu is NOT on
             if (!NetworkDCMenu.isOn)
             {
                 if (Input.GetKeyDown("space"))
@@ -44,7 +50,15 @@ public class NetworkPlayerShoot : NetworkBehaviour {
 		}
 	}
 
-	[Client]
+    //========================================
+    // OK! So, here we fire our gun on the client
+    // side.  I am using Vector3.right and left
+    // because they are relavent to the x acis and
+    // do not care what way the cube or capsule 
+    // is faceing.  I use a boolean dirRigh to determine
+    // which we we faced last
+    //========================================
+    [Client]
 	void FireTheLaser()
 	{
 		Ray ray;
@@ -61,19 +75,21 @@ public class NetworkPlayerShoot : NetworkBehaviour {
 
         if (Physics.Raycast(ray, out _hit, RayGun.range, mask))
         {
-            if (_hit.collider.tag == PLAYER_TAG)
+            //Tag the prefab of player to Player! (we check to see if it is our own player in NetworkPlayer
+            if (_hit.collider.tag == "Player")
             {
-                CmdPlayerHasBeenShot(_hit.collider.name, RayGun.damage);
+                //Control the shooting by the server
+                CmdShootHim(_hit.collider.name, RayGun.damage, transform.name);
             }
         }
 	}
 
 	[Command]
-	void CmdPlayerHasBeenShot(string _pid, int _dmg)
+	void CmdShootHim(string _pid, int _dmg, string _source)
 	{
 		Debug.Log (_pid + " has been shot");
 
         NetworkPlayer _nPlayer = NetworkGameManager.GetPlayer(_pid);
-        _nPlayer.RpcTakeDamage(_dmg);
+        _nPlayer.RpcTakeDamage(_dmg,_source);
 	}
 }

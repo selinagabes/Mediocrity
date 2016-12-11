@@ -361,6 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DCMenu: {fileID: 1000011445785504}
+  ScoreBoard: {fileID: 1000014057787160}
 --- !u!114 &114000014121811134
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -2,6 +2,14 @@
 using System.Collections;
 using UnityEngine.Networking;
 
+/*====================================================
+Here we set up the Network Player!  
+Set up things like;
+Camera
+Name
+UI
+Proper Layers for remote and local players
+====================================================*/
 [RequireComponent(typeof(NetworkPlayer))]
 public class NetworkPlayerSetup : NetworkBehaviour {
 
@@ -17,6 +25,7 @@ public class NetworkPlayerSetup : NetworkBehaviour {
 
 	void Start () 
 	{
+        //I found if I didn't always check I would get buggy behaviour on both instances, moreso the client
 		if (isLocalPlayer) 
 		{
             GetComponent<NetworkPlayer>().PlayerSetup();
@@ -56,7 +65,9 @@ public class NetworkPlayerSetup : NetworkBehaviour {
 
         NetworkGameManager.RegisterPlayer(_netID, _nPlayer);
 	}
-
+    //======================================
+    // If DC'd or the client dies, she gone!
+    //======================================
     void OnDisable()
     {
         NetworkGameManager.DeRegisterPlayer(transform.name);
@@ -75,6 +86,11 @@ public class NetworkPlayerSetup : NetworkBehaviour {
 
 	}
 
+    //====================================
+    // Assign both players to a layer on
+    // each client, and they should be
+    // different on both!
+    //====================================
 	void AssignLocalPlayer()
 	{
 		gameObject.layer = LayerMask.NameToLayer (localLayerName);
