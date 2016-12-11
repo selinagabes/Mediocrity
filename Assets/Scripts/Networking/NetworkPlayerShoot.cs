@@ -17,8 +17,14 @@ public class NetworkPlayerShoot : NetworkBehaviour {
 	[SerializeField]
 	private LayerMask mask;
 	private string _id;
+    
+    [SerializeField]
+    LineRenderer laserBeam;
 
-	void Start()
+    public GameObject laser1;
+    public GameObject laser2;
+
+    void Start()
 	{
 		RegisterPlayer ();
 	}
@@ -28,7 +34,14 @@ public class NetworkPlayerShoot : NetworkBehaviour {
         //What is our player going to be named
 		_id = "Player " + GetComponent<NetworkIdentity> ().netId;
 		transform.name = _id;
-	}
+
+        laser1 = GameObject.Find("Laser1");
+        laser2 = GameObject.Find("Laser2");
+
+        NetworkGameManager.RegisterPlayer(_id, GetComponent<NetworkPlayer>());
+
+        laserBeam = laser1.GetComponent<LineRenderer>();
+    }
 
 	void Update()
 	{
@@ -43,7 +56,7 @@ public class NetworkPlayerShoot : NetworkBehaviour {
                         dirRight = true;
                     else if (CrossPlatformInputManager.GetAxis("Horizontal") < 0)
                         dirRight = false;
-
+                    
                     FireTheLaser();
                 }
             }
@@ -63,8 +76,10 @@ public class NetworkPlayerShoot : NetworkBehaviour {
 	{
 		Ray ray;
 		RaycastHit _hit;
+        
+        laserBeam.SetPosition(0, new Vector3(this.transform.position.x,this.transform.position.y,this.transform.position.z));
 
-		if (dirRight) 
+        if (dirRight) 
 		{	
 			ray = new Ray (transform.position, new Vector3(1,0,0));
 		} 
@@ -81,8 +96,33 @@ public class NetworkPlayerShoot : NetworkBehaviour {
                 //Control the shooting by the server
                 CmdShootHim(_hit.collider.name, RayGun.damage, transform.name);
             }
+
+            laserBeam.SetPosition(1, _hit.point);
         }
-	}
+        else
+        {
+            if (dirRight)
+            {
+                laserBeam.SetPosition(1, new Vector3(RayGun.range, this.transform.position.y, this.transform.position.z));
+            }
+            else
+            {
+                laserBeam.SetPosition(1, new Vector3(-RayGun.range, this.transform.position.y, this.transform.position.z));
+            }
+        }
+
+        laserBeam.SetWidth(.2f, .2f);
+        
+
+        StartCoroutine(DisableLaser());
+    }
+
+    IEnumerator DisableLaser()
+    {
+        laserBeam.enabled = true;
+        yield return new WaitForSeconds(.2f);
+        laserBeam.enabled = false;
+    }
 
 	[Command]
 	void CmdShootHim(string _pid, float _dmg, string _source)
