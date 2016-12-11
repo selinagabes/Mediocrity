@@ -19,27 +19,13 @@ public class NetworkPlayerSetup : NetworkBehaviour {
 	[SerializeField]
 	string localLayerName = "LocalPlayer";
 
-    [SerializeField]
-    GameObject playerUIprefab;
-    private GameObject playerUIInstance;
-
 	void Start () 
 	{
         //I found if I didn't always check I would get buggy behaviour on both instances, moreso the client
 		if (isLocalPlayer) 
 		{
             GetComponent<NetworkPlayer>().PlayerSetup();
-            this.GetComponentInChildren<TextMesh> ().text = "Player";
-
-            //Create Player UI
-            playerUIInstance = Instantiate(playerUIprefab);
-            playerUIInstance.name = playerUIprefab.name;
-
-            //Configure UI
-            NetworkPlayerUI playerUI = playerUIInstance.GetComponent<NetworkPlayerUI>();
-            if (playerUI == null)
-                Debug.Log("No UI!");
-
+            this.GetComponentInChildren<TextMesh>().text = "Player";
         }
 
         //Set Up Camera
@@ -71,8 +57,6 @@ public class NetworkPlayerSetup : NetworkBehaviour {
     void OnDisable()
     {
         NetworkGameManager.DeRegisterPlayer(transform.name);
-
-        Destroy(playerUIInstance);
     }
 
 	public void SetupCamera()

@@ -14,19 +14,28 @@ public class NetworkPlayer : NetworkBehaviour
     //========================================
     public int kills;
     public int deaths;
-    public int maxHealth = 100;
+    public float maxHealth = 100f;
     [SerializeField]
     private Behaviour[] disableWhenDead;
     private bool[] wasEnabled;
     public GameObject deathEffect;
     public GameObject spawnEffect;
     private bool FirstSetup = true;
+    [SerializeField]
+    GameObject playerUIprefab;
+    private NetworkPlayerUI playerUI;
+    private GameObject playerUIInstance;
 
     //========================================
     // Netowrk Stuff
     //========================================
     [SyncVar]
-    private int currentHealth;
+    private float currentHealth;
+
+    public float GetCurrentHealth()
+    {
+        return currentHealth;
+    }
 
     [SyncVar]
     private bool _isDead = false;
@@ -70,18 +79,23 @@ public class NetworkPlayer : NetworkBehaviour
                 wasEnabled[i] = disableWhenDead[i].enabled;
             }
             FirstSetup = false;
+
+            if (isLocalPlayer)
+            {
+                //Create Player UI
+                playerUIInstance = Instantiate(playerUIprefab);
+                playerUIInstance.name = playerUIprefab.name;
+
+                //Configure UI
+                playerUI = playerUIInstance.GetComponent<NetworkPlayerUI>();
+                if (playerUI == null)
+                    Debug.Log("No UI!");
+
+                //Link the UI for things like healthbar or scoreboard (if created)
+                playerUI.SetPlayer(this);
+            }
         }
         SetStatsAndStuff();
-    }
-
-    void Update()
-    {
-        if (isLocalPlayer)
-        {
-            //This was used for testing.  I like to call it Zues's Hammer
-            if (Input.GetKeyDown(KeyCode.K))
-                RpcTakeDamage(9999," ");
-        }
     }
 
     //====================================
@@ -109,16 +123,18 @@ public class NetworkPlayer : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RpcTakeDamage(int _amt, string _source)
+    public void RpcTakeDamage(float _amt, string _source)
     {
         if (isDead)
             return;
 
         currentHealth -= _amt;
+
         Debug.Log(transform.name + " now has " + currentHealth + " health.");
 
         if (currentHealth <= 0)
         {
+            currentHealth = 0f;
             Killit(_source);
         }
     }
@@ -176,6 +192,11 @@ public class NetworkPlayer : NetworkBehaviour
         PlayerSetup();
 
         Debug.Log(transform.name + " Respawned!");
+    }
+
+    void OnDisable()
+    {
+        //Destroy(playerUIInstance);
     }
 }
         

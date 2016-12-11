@@ -102,7 +102,6 @@
     <Compile Include="Assets\Scripts\Networking\NetworkPlayerShoot.cs" />
     <Compile Include="Assets\Scripts\Networking\NetworkPlayerUI.cs" />
     <Compile Include="Assets\Scripts\Networking\NetworkPlayerWeapon.cs" />
-    <Compile Include="Assets\Scripts\Networking\NetworkScoreboard.cs" />
     <Compile Include="Assets\Scripts\QuitOnClick.cs" />
     <Compile Include="Assets\Scripts\SelectOnInput.cs" />
     <Compile Include="Assets\Scripts\SinglePlayerController.cs" />

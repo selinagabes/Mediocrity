@@ -85,7 +85,7 @@ public class NetworkPlayerShoot : NetworkBehaviour {
 	}
 
 	[Command]
-	void CmdShootHim(string _pid, int _dmg, string _source)
+	void CmdShootHim(string _pid, float _dmg, string _source)
 	{
 		Debug.Log (_pid + " has been shot");
 

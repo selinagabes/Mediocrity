@@ -287,6 +287,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea68a581030e1664b88a81acf3272fef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kills: 0
+  deaths: 0
   maxHealth: 100
   disableWhenDead:
   - {fileID: 114000012142216036}
@@ -294,6 +296,8 @@ MonoBehaviour:
   deathEffect: {fileID: 1000011005725970, guid: b2c08edfe08f12e4aac26b1f17ba560b,
     type: 2}
   spawnEffect: {fileID: 1000013675947374, guid: ec05e689272bfb243af72308add346ce,
+    type: 2}
+  playerUIprefab: {fileID: 1000013641412800, guid: 1cd60e0672a352f4a886a13430f0d0e0,
     type: 2}
 --- !u!114 &114000014075292320
 MonoBehaviour:
@@ -308,5 +312,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   remoteLayerName: RemotePlayer
   localLayerName: LocalPlayer
-  playerUIprefab: {fileID: 1000013641412800, guid: 1cd60e0672a352f4a886a13430f0d0e0,
-    type: 2}
