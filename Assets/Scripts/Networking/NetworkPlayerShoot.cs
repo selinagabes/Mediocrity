@@ -38,9 +38,14 @@ public class NetworkPlayerShoot : NetworkBehaviour {
         laser1 = GameObject.Find("Laser1");
         laser2 = GameObject.Find("Laser2");
 
-        NetworkGameManager.RegisterPlayer(_id, GetComponent<NetworkPlayer>());
-
-        laserBeam = laser1.GetComponent<LineRenderer>();
+        if (NetworkGameManager.GetPlayers().Length == 1)
+        {
+            laserBeam = laser1.GetComponent<LineRenderer>();
+        }
+        else
+        {
+            laserBeam = laser2.GetComponent<LineRenderer>();
+        }
     }
 
 	void Update()
@@ -76,8 +81,9 @@ public class NetworkPlayerShoot : NetworkBehaviour {
 	{
 		Ray ray;
 		RaycastHit _hit;
-        
-        laserBeam.SetPosition(0, new Vector3(this.transform.position.x,this.transform.position.y,this.transform.position.z));
+        Vector3 start = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
+        Vector3 end;
+        //laserBeam.SetPosition(0, new Vector3(this.transform.position.x,this.transform.position.y,this.transform.position.z));
 
         if (dirRight) 
 		{	
@@ -97,22 +103,43 @@ public class NetworkPlayerShoot : NetworkBehaviour {
                 CmdShootHim(_hit.collider.name, RayGun.damage, transform.name);
             }
 
-            laserBeam.SetPosition(1, _hit.point);
+            //laserBeam.SetPosition(1, _hit.point);
+            end = _hit.point;
         }
         else
         {
             if (dirRight)
             {
-                laserBeam.SetPosition(1, new Vector3(RayGun.range, this.transform.position.y, this.transform.position.z));
+                end = new Vector3(this.transform.position.x + RayGun.range, this.transform.position.y, this.transform.position.z);
+                //laserBeam.SetPosition(1, new Vector3(this.transform.position.x + RayGun.range, this.transform.position.y, this.transform.position.z));
             }
             else
             {
-                laserBeam.SetPosition(1, new Vector3(-RayGun.range, this.transform.position.y, this.transform.position.z));
+                end = new Vector3(this.transform.position.x - RayGun.range, this.transform.position.y, this.transform.position.z);
+                //laserBeam.SetPosition(1, new Vector3(this.transform.position.x  - RayGun.range, this.transform.position.y, this.transform.position.z));
             }
         }
 
-        laserBeam.SetWidth(.2f, .2f);
+        //Let's draw the laser over the network
+        CmdDrawLaser(start, end);
         
+
+        laserBeam.SetWidth(.2f, .2f);
+
+        StartCoroutine(DisableLaser());
+    }
+
+    [Command]
+    void CmdDrawLaser(Vector3 _1, Vector3 _2)
+    {
+        RpcBroadCastLaser(_1,_2);
+    }
+
+    [ClientRpc]
+    void RpcBroadCastLaser(Vector3 _1, Vector3 _2)
+    {
+        laserBeam.SetPosition(0, _1);
+        laserBeam.SetPosition(1, _2);
 
         StartCoroutine(DisableLaser());
     }

@@ -14,10 +14,26 @@ public class NetworkPlayer : NetworkBehaviour
     //========================================
     public int kills;
     public int deaths;
+    [SerializeField]
+    private int teeth;
+    [SerializeField]
+    private int points;
+
+    public void AddPoints(int p)
+    {
+        points += p;
+    }
+
+    public int GetPoints()
+    {
+        return points;
+    }
+    
     public float maxHealth = 100f;
     [SerializeField]
     private Behaviour[] disableWhenDead;
     private bool[] wasEnabled;
+
     public GameObject deathEffect;
     public GameObject spawnEffect;
     private bool FirstSetup = true;
@@ -25,6 +41,7 @@ public class NetworkPlayer : NetworkBehaviour
     GameObject playerUIprefab;
     private NetworkPlayerUI playerUI;
     private GameObject playerUIInstance;
+    private NetworkToothSpawner GameMaster;
 
     //========================================
     // Netowrk Stuff
@@ -44,6 +61,8 @@ public class NetworkPlayer : NetworkBehaviour
         get { return _isDead; }
         protected set { _isDead = value; }
     }
+
+    private Collider toothCollider;
 
     //========================================
     // Player Setup
@@ -151,9 +170,15 @@ public class NetworkPlayer : NetworkBehaviour
         if(sourcePlayer != null)
         {
             sourcePlayer.kills++;
+            sourcePlayer.AddPoints(1000);
         }
 
         deaths++;
+
+        //Penalty for death? Small considering the respawn time!
+        points -= 250;
+        if (points < 0)
+            points = 0;
 
         Debug.Log(transform.name + " is dead");
 
@@ -194,9 +219,40 @@ public class NetworkPlayer : NetworkBehaviour
         Debug.Log(transform.name + " Respawned!");
     }
 
-    void OnDisable()
+    //======================================
+    // Trigger for Teeth!
+    // It seems the network transforms 
+    // take care of the server
+    // client stuff here!
+    //======================================
+    void OnTriggerEnter(Collider other)
     {
-        //Destroy(playerUIInstance);
+        if(other.gameObject.CompareTag("Tooth"))
+        {
+            other.gameObject.SetActive(false);
+            teeth++;
+            points += 100;
+            Debug.Log("You know have " + teeth + "teeth");
+        }
     }
-}
-        
+
+    //Called from the UI when time runs out.  Hackey, but efficient
+    public void GameOver()
+    {
+        //Disable Components
+        for (int i = 0; i < disableWhenDead.Length; i++)
+        {
+            disableWhenDead[i].enabled = false;
+        }
+
+        //Explode!
+        GameObject _gfxIns = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(_gfxIns, 3f);
+
+        //Disable Movement
+        if (isLocalPlayer)
+            GetComponent<NetworkPlayerMove>().enabled = false;
+
+    }
+}   
+
