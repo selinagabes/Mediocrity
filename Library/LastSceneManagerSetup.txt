@@ -1,4 +1,4 @@
 sceneSetups:
-- path: C:/Users/selinagabes/Documents/Unity/A3 - Selina Gabriele/Assets/Scenes/MainMenu.unity
+- path: Assets/Scenes/Grandma.unity
   isLoaded: 1
   isActive: 1

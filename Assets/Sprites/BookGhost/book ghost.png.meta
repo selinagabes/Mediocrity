@@ -1,0 +1,1016 @@
+fileFormatVersion: 2
+guid: 229e1eef01af3b44192132fd4c468b4f
+timeCreated: 1481414730
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: book ghost_0
+    21300002: book ghost_1
+    21300004: book ghost_2
+    21300006: book ghost_3
+    21300008: book ghost_4
+    21300010: book ghost_5
+    21300012: book ghost_6
+    21300014: book ghost_7
+    21300016: book ghost_8
+    21300018: book ghost_9
+    21300020: book ghost_10
+    21300022: book ghost_11
+    21300024: book ghost_12
+    21300026: book ghost_13
+    21300028: book ghost_14
+    21300030: book ghost_15
+    21300032: book ghost_16
+    21300034: book ghost_17
+    21300036: book ghost_18
+    21300038: book ghost_19
+    21300040: book ghost_20
+    21300042: book ghost_21
+    21300044: book ghost_22
+    21300046: book ghost_23
+    21300048: book ghost_24
+    21300050: book ghost_25
+    21300052: book ghost_26
+    21300054: book ghost_27
+    21300056: book ghost_28
+    21300058: book ghost_29
+    21300060: book ghost_30
+    21300062: book ghost_31
+    21300064: book ghost_32
+    21300066: book ghost_33
+    21300068: book ghost_34
+    21300070: book ghost_35
+    21300072: book ghost_36
+    21300074: book ghost_37
+    21300076: book ghost_38
+    21300078: book ghost_39
+    21300080: book ghost_40
+    21300082: book ghost_41
+    21300084: book ghost_42
+    21300086: book ghost_43
+    21300088: book ghost_44
+    21300090: book ghost_45
+    21300092: book ghost_46
+    21300094: book ghost_47
+    21300096: book ghost_48
+    21300098: book ghost_49
+    21300100: book ghost_50
+    21300102: book ghost_51
+    21300104: book ghost_52
+    21300106: book ghost_53
+    21300108: book ghost_54
+    21300110: book ghost_55
+    21300112: book ghost_56
+    21300114: book ghost_57
+    21300116: book ghost_58
+    21300118: book ghost_59
+    21300120: book ghost_60
+    21300122: book ghost_61
+    21300124: book ghost_62
+    21300126: book ghost_63
+    21300128: book ghost_64
+    21300130: book ghost_65
+    21300132: book ghost_66
+    21300134: book ghost_67
+    21300136: book ghost_68
+    21300138: book ghost_69
+    21300140: book ghost_70
+    21300142: book ghost_71
+    21300144: book ghost_72
+    21300146: book ghost_73
+    21300148: book ghost_74
+    21300150: book ghost_75
+    21300152: book ghost_76
+    21300154: book ghost_77
+    21300156: book ghost_78
+    21300158: book ghost_79
+    21300160: book ghost_80
+    21300162: book ghost_81
+    21300164: book ghost_82
+    21300166: book ghost_83
+    21300168: book ghost_84
+    21300170: book ghost_85
+    21300172: book ghost_86
+    21300174: book ghost_87
+    21300176: book ghost_88
+    21300178: book ghost_89
+    21300180: book ghost_90
+    21300182: book ghost_91
+    21300184: book ghost_92
+    21300186: book ghost_93
+    21300188: book ghost_94
+    21300190: book ghost_95
+    21300192: book ghost_96
+    21300194: book ghost_97
+    21300196: book ghost_98
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: book ghost_0
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 589
+        width: 72
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_1
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 589
+        width: 79
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_2
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 589
+        width: 87
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_3
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 589
+        width: 77
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_4
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 589
+        width: 72
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_5
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 589
+        width: 70
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_6
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 483
+        width: 74
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_7
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 483
+        width: 77
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_8
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 482
+        width: 79
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_9
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 482
+        width: 77
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_10
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 482
+        width: 72
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_11
+      rect:
+        serializedVersion: 2
+        x: 572
+        y: 482
+        width: 70
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_12
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 350
+        width: 78
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_13
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 415
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_14
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 400
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_15
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 400
+        width: 28
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_16
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 403
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_17
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 403
+        width: 33
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_18
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 391
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_19
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 400
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_20
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 384
+        width: 33
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_21
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 384
+        width: 47
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_22
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 384
+        width: 4
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_23
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 384
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_24
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 384
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_25
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 384
+        width: 28
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_26
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 363
+        width: 38
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_27
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 183
+        width: 83
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_28
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 184
+        width: 105
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_29
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 183
+        width: 113
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_30
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 183
+        width: 120
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_31
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 183
+        width: 124
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_32
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 183
+        width: 131
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_33
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 183
+        width: 116
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_34
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 183
+        width: 107
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_35
+      rect:
+        serializedVersion: 2
+        x: 1076
+        y: 183
+        width: 103
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_36
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 22
+        width: 78
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_37
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 80
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_38
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 22
+        width: 81
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_39
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 22
+        width: 85
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_40
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 22
+        width: 82
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_41
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 61
+        width: 86
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_42
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 68
+        width: 70
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_43
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 22
+        width: 76
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_44
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 22
+        width: 75
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_45
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 22
+        width: 80
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_46
+      rect:
+        serializedVersion: 2
+        x: 788
+        y: 22
+        width: 87
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_47
+      rect:
+        serializedVersion: 2
+        x: 894
+        y: 21
+        width: 90
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_48
+      rect:
+        serializedVersion: 2
+        x: 1007
+        y: 21
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_49
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 32
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_50
+      rect:
+        serializedVersion: 2
+        x: 1034
+        y: 23
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_51
+      rect:
+        serializedVersion: 2
+        x: 1042
+        y: 31
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_52
+      rect:
+        serializedVersion: 2
+        x: 1054
+        y: 33
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_53
+      rect:
+        serializedVersion: 2
+        x: 1062
+        y: 30
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_54
+      rect:
+        serializedVersion: 2
+        x: 1073
+        y: 34
+        width: 12
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_55
+      rect:
+        serializedVersion: 2
+        x: 1085
+        y: 29
+        width: 12
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_56
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 33
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_57
+      rect:
+        serializedVersion: 2
+        x: 1130
+        y: 24
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_58
+      rect:
+        serializedVersion: 2
+        x: 1160
+        y: 21
+        width: 51
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_59
+      rect:
+        serializedVersion: 2
+        x: 1006
+        y: 28
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_60
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 27
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_61
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 25
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_62
+      rect:
+        serializedVersion: 2
+        x: 1064
+        y: 21
+        width: 21
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_63
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 23
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_64
+      rect:
+        serializedVersion: 2
+        x: 1121
+        y: 26
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: book ghost_65
+      rect:
+        serializedVersion: 2
+        x: 1141
+        y: 24
+        width: 15
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
