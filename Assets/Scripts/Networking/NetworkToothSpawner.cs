@@ -8,6 +8,14 @@ would be super easy to control game functions
 from a seperate class other than the player
 scripts.  Wait until someone collects all the
 teeth, and BOOM, they win!
+
+So now this doubles as the Tooth Spawner
+as well as the Game Timer, calling the 
+appropriate function for each players UI
+UPDATE:  This has mostly been moved to
+the player UI for cleanliness as the UI
+and the NetwrokPlayer class work closely
+to accomplish most of our online stuff.
 ==============================================*/
 [RequireComponent(typeof(NetworkGameManager))]
 public class NetworkToothSpawner : NetworkBehaviour {
@@ -19,9 +27,11 @@ public class NetworkToothSpawner : NetworkBehaviour {
     [SerializeField]
     private float gameTime = 120f;
 
+    //============================
+    // All our private stuff!
+    //============================
     private float toothTime;
     private float gameTimer;
-    private int playerCount = 0;
     private bool gameOn = false;
     private bool gameSwitch = true;
 
@@ -79,6 +89,13 @@ public class NetworkToothSpawner : NetworkBehaviour {
         }
 	}
 
+    /*=====================================
+    I had to throw this in here because when
+    both the clients connected, one GUI would
+    be ahead of the other.  By making the
+    spawner wait a few seconds, it seemed
+    to have cleared up any issues!
+    ======================================*/
     IEnumerator StartGameIn3()
     {
         yield return new WaitForSeconds(1f);
@@ -86,6 +103,7 @@ public class NetworkToothSpawner : NetworkBehaviour {
     }
 
     //Spawn Teeth Every Second in Random Places!
+    //Unity has a great tutorial on this! (for spawning enemies, but essentially the same thing
     [Command]
     void CmdSpawnTeeth()
     {

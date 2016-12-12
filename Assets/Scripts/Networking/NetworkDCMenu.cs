@@ -3,6 +3,9 @@ using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
 using System.Collections;
 
+//====================================
+// Nothing to see here
+//====================================
 public class NetworkDCMenu : MonoBehaviour {
 
     public static bool isOn = false;

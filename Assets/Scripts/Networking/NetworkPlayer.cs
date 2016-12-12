@@ -232,11 +232,11 @@ public class NetworkPlayer : NetworkBehaviour
             other.gameObject.SetActive(false);
             teeth++;
             points += 100;
-            Debug.Log("You know have " + teeth + "teeth");
         }
     }
 
     //Called from the UI when time runs out.  Hackey, but efficient
+    //Kill controls, everything!
     public void GameOver()
     {
         //Disable Components
