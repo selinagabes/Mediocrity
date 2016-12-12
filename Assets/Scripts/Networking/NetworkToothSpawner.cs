@@ -98,7 +98,7 @@ public class NetworkToothSpawner : NetworkBehaviour {
     ======================================*/
     IEnumerator StartGameIn3()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         gameOn = true;
     }
 
