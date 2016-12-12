@@ -88,6 +88,28 @@ public class PlayerController : MonoBehaviour
 			numTeeth++;
             other.gameObject.SetActive(false);
         }
+        if (other.gameObject.CompareTag("Death"))
+        {
+            Debug.Log("You dead");
+            //other.gameObject.SetActive(false);
+        }
+        if (other.gameObject.CompareTag("EndZone"))
+        {
+            gameObject.SetActive(false);
+            var currentZone = GameObject.FindGameObjectWithTag("Zone");
+            float nextZoneX = currentZone.GetComponentInChildren<MapGenerator>().width - currentZone.GetComponentInChildren<MeshGenerator>().wallHeight + currentZone.transform.position.x;
+            Vector3 nextZonePos = new Vector3(nextZoneX, 0, 0);
+            var nextZone = GameObject.FindGameObjectWithTag("ZoneManager");
+            nextZone.GetComponent<ZoneGenerator>().RestartZone(nextZonePos);
+            MeshGenerator nextMesh = GameObject.FindGameObjectWithTag("LevelPath").GetComponent<MeshGenerator>();
+            Vector3 nextMin = nextMesh.GetMinimumVertex();
+            transform.position = new Vector3(nextMin.x + 5f, nextMin.z + 1f, 2.5f);
+            gameObject.SetActive(true);
+            //ONCE INSTANTIATED, TELEPORT TO THE MINIMUM VERTEX AND STUFF.......
+
+
+            Debug.Log("New Zone");
+        }
 
 		if (other.GetComponent<Collider>().tag == "EnemyHead") {
 			if (other.transform.parent.gameObject.GetComponent<GUIText>().text == "BookGhost") {

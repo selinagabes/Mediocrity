@@ -11,6 +11,10 @@ obj/
 .consulo/
 /*.csproj
 *.unityproj
+
+*.log
+*.dll
+*.mdb
 /*.sln
 *.suo
 *.tmp

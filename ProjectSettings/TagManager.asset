@@ -6,6 +6,12 @@ TagManager:
   tags:
   - LevelPath
   - Tooth
+  - MiddleStep
+  - Death
+  - Spawn
+  - EndZone
+  - Zone
+  - ZoneManager
   - Enemy
   - bullet
   - EnemyHead

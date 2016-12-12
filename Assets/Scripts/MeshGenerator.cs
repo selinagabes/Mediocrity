@@ -12,7 +12,7 @@ public class MeshGenerator : MonoBehaviour
     public int tileSize = -1;
     public MeshFilter Walls;
     List<Vector3> vertices;
-    List<Vector3> wallVertices;
+    public List<Vector3> wallVertices;
     List<int> triangles;
     Dictionary<int, List<Triangle>> triangleDictionary = new Dictionary<int, List<Triangle>>();
     List<List<int>> outlines = new List<List<int>>();
@@ -23,13 +23,12 @@ public class MeshGenerator : MonoBehaviour
         triangleDictionary.Clear();
         outlines.Clear();
         checkedVertices.Clear();
-        //wallVertices.Clear();
 
         squareGrid = new SquareGrid(map, squareSize);
 
         vertices = new List<Vector3>();
         triangles = new List<int>();
-
+        wallVertices = new List<Vector3>();
         for (int x = 0; x < squareGrid.squares.GetLength(0); x++)
         {
             for (int y = 0; y < squareGrid.squares.GetLength(1); y++)
@@ -79,6 +78,22 @@ public class MeshGenerator : MonoBehaviour
         }
 
         return minimumVertex;
+    }
+
+    public Vector3 GetMaximumVertex()
+    {
+
+        Vector3 minimumVertex = GetMinimumVertex();
+        Vector3 nextMinVertex = minimumVertex;
+        List<Vector3> path = wallVertices.Where(w => w.x >= minimumVertex.x && w.z <= minimumVertex.z + 5).ToList();
+        foreach (var wall in path)
+        {
+            if (wall.x >= nextMinVertex.x  && wall.z <= minimumVertex.z)
+                nextMinVertex = wall;
+        }
+   
+
+        return nextMinVertex;
     }
 
     private void CreateWallMesh()
