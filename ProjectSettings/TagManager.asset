@@ -11,6 +11,7 @@ TagManager:
   - Spawn
   - EndZone
   - Zone
+  - ZoneManager
   layers:
   - Default
   - TransparentFX

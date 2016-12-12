@@ -17,16 +17,7 @@ public class MapGenerator : MonoBehaviour
     {
         GenerateMap();
     }
-    
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-           // GenerateMap();
-            //SpawnController spawner = GameObject.FindGameObjectWithTag("Spawn").GetComponent<SpawnController>();
-            //spawner.Spawn(); 
-        }
-    }
+   
     public void GenerateMap()
     {
         _map = new int[width, height];

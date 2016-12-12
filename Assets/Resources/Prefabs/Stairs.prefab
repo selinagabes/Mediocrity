@@ -109,7 +109,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012403216254}
-  - 114: {fileID: 114000014097652804}
   - 114: {fileID: 114000010691477044}
   m_Layer: 0
   m_Name: Right
@@ -163,7 +162,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010283960154}
-  - 114: {fileID: 114000013013632730}
   m_Layer: 0
   m_Name: Stairs
   m_TagString: Untagged
@@ -804,17 +802,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slerper: {fileID: 1000012365474966}
---- !u!114 &114000013013632730
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013568442226}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6747eb3eadefcb4bb062f9b6c44d132, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114000013238657360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -830,14 +817,3 @@ MonoBehaviour:
   _lerpTotalTime: 1
   _distanceToMove: 2
   _percentageTrip: 0
---- !u!114 &114000014097652804
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013047782168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6747eb3eadefcb4bb062f9b6c44d132, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -4,16 +4,28 @@ using System.Linq;
 
 public class ZoneGenerator : MonoBehaviour
 {
-    public GameObject Zone; 
-   void GenerateNextZone()
+    private GameObject ZoneInstance;
+    private int NumOfZones = 0;
+    public int MaxNumberOfZones = 10;
+    Vector3 Position = new Vector3();
+    GameObject ZonePrefab;
+  
+    void Awake()
     {
-
-        List<GameObject> layers = Zone.GetComponentsInChildren<GameObject>().ToList();
-        foreach(GameObject map in layers)
-        {
-            map.GetComponent<MapGenerator>().GenerateMap();
-        }
+        BeginZone();
     }
-   
+    private void BeginZone()
+    {
+        ZonePrefab = (GameObject)Resources.Load("Prefabs/Zone");
+        ZoneInstance = (GameObject)Instantiate(ZonePrefab, Position, new Quaternion());
+    }
+    public void RestartZone(Vector3 position)
+    {
+        Position = position;
+        NumOfZones++;
+        ZoneInstance.SetActive(false);
+        Destroy(ZoneInstance.gameObject);
+        BeginZone();
+    }  
     
 }

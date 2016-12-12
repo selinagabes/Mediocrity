@@ -37,25 +37,19 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("EndZone"))
         {
-            transform.position = other.transform.position;
-            GameObject Zone = other.gameObject.GetComponent<ZoneGenerator>().Zone;
-            MapGenerator currentMap = Zone.GetComponentInChildren<MapGenerator>();
-            MeshGenerator meshGen1 = Zone.GetComponentInChildren<MeshGenerator>();
-           meshGen1.wallVertices.Clear();
-            float newX = currentMap.width / 2 + 0.5f;
-            Vector3 pos = new Vector3(2*newX, 0, 0);
-            //DELETE THE OLD ONE .. KEEP THE PORTAL THERE AND INSTATION AFTER
-          //  
-            GameObject newZone = (GameObject)Resources.Load("Prefabs/Zone");
-            GameObject currentZone = (GameObject)Instantiate(newZone, pos, new Quaternion());
-            MeshGenerator meshGen = currentZone.GetComponentInChildren<MeshGenerator>();
-          //  meshGen.wallVertices.Clear();
-            Vector3 teleport = meshGen.GetMinimumVertex();
-            teleport = new Vector3(teleport.x + currentZone.transform.position.x, teleport.z, 2.5f);
-            transform.position = teleport;
-            Destroy(Zone);
-            var spawn = GameObject.FindGameObjectWithTag("Spawn").GetComponent<SpawnController>();
-            spawn.Spawn();
+            gameObject.SetActive(false);
+            var currentZone = GameObject.FindGameObjectWithTag("Zone");
+            float nextZoneX = currentZone.GetComponentInChildren<MapGenerator>().width - currentZone.GetComponentInChildren<MeshGenerator>().wallHeight + currentZone.transform.position.x;
+            Vector3 nextZonePos = new Vector3(nextZoneX, 0, 0);
+            var nextZone = GameObject.FindGameObjectWithTag("ZoneManager");
+            nextZone.GetComponent<ZoneGenerator>().RestartZone(nextZonePos);
+            MeshGenerator nextMesh = GameObject.FindGameObjectWithTag("LevelPath").GetComponent<MeshGenerator>();
+            Vector3 nextMin = nextMesh.GetMinimumVertex();
+            transform.position = new Vector3(nextMin.x + 5f, nextMin.z + 1f, 2.5f);
+            gameObject.SetActive(true);
+            //ONCE INSTANTIATED, TELEPORT TO THE MINIMUM VERTEX AND STUFF.......
+
+
             Debug.Log("New Zone");
         }
 
