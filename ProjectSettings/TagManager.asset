@@ -6,6 +6,11 @@ TagManager:
   tags:
   - LevelPath
   - Tooth
+  - Enemy
+  - bullet
+  - EnemyHead
+  - HitBox
+  - ExplodeZone
   layers:
   - Default
   - TransparentFX
