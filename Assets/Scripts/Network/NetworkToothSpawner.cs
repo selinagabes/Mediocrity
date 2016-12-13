@@ -108,7 +108,7 @@ public class NetworkToothSpawner : NetworkBehaviour {
     {
         if (isServer)
         {
-            Vector3 spawnPosition = new Vector3(Random.Range(-8.0f, 8.0f), 0.0f, 0.0f);
+            Vector3 spawnPosition = new Vector3(Random.Range(-40.0f, 40.0f), 5.0f, 1f);
             Quaternion spawnRotation = Quaternion.Euler(0.0f, Random.Range(0, 180), 0.0f);
             RpcSpawnTeeth(spawnPosition, spawnRotation);
             Debug.Log("Spawning Tooth");
@@ -118,7 +118,7 @@ public class NetworkToothSpawner : NetworkBehaviour {
     [ClientRpc]
     void RpcSpawnTeeth(Vector3 sp, Quaternion sr)
     {
-        var enemy = (GameObject)Instantiate(toothPrefab, sp, sr);
-        NetworkServer.Spawn(enemy);
+            var enemy = (GameObject)Instantiate(toothPrefab, sp, sr);
+            NetworkServer.Spawn(enemy);
     }
 }
