@@ -77,21 +77,21 @@ public class NetworkPlayerShoot : NetworkBehaviour {
     //========================================
     [Client]
 	void FireTheLaser()
-	{
-		Ray ray;
-		RaycastHit _hit;
+    {
+        Ray ray;
+        RaycastHit _hit;
         Vector3 start = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
         Vector3 end;
         //laserBeam.SetPosition(0, new Vector3(this.transform.position.x,this.transform.position.y,this.transform.position.z));
 
-        if (dirRight) 
-		{	
-			ray = new Ray (transform.position, new Vector3(1,0,0));
-		} 
-		else 
-		{
-			ray = new Ray (transform.position, new Vector3(-1,0,0));
-		}
+        if (dirRight)
+        {
+            ray = new Ray(transform.position, new Vector3(1, 0, 0));
+        }
+        else
+        {
+            ray = new Ray(transform.position, new Vector3(-1, 0, 0));
+        }
 
         if (Physics.Raycast(ray, out _hit, RayGun.range, mask))
         {
@@ -120,22 +120,24 @@ public class NetworkPlayerShoot : NetworkBehaviour {
         }
 
         //Let's draw the laser over the network
-        laserBeam.SetPosition(0, start);
-        laserBeam.SetPosition(1, end);
-        laserBeam.SetWidth(.2f, .2f);
-        CmdDrawLaser();
+        CmdDrawLaser(start, end);
+
         StartCoroutine(DisableLaser());
     }
 
     [Command]
-    void CmdDrawLaser()
+    void CmdDrawLaser(Vector3 _1, Vector3 _2)
     {
-        RpcBroadCastLaser();
+        RpcBroadCastLaser(_1, _2);
     }
 
     [ClientRpc]
-    void RpcBroadCastLaser()
+    void RpcBroadCastLaser(Vector3 _1, Vector3 _2)
     {
+        laserBeam.SetPosition(0, _1);
+        laserBeam.SetPosition(1, _2);
+        laserBeam.SetWidth(.5f, .5f);
+
         StartCoroutine(DisableLaser());
     }
 
@@ -146,12 +148,13 @@ public class NetworkPlayerShoot : NetworkBehaviour {
         laserBeam.enabled = false;
     }
 
-	[Command]
-	void CmdShootHim(string _pid, float _dmg, string _source)
-	{
-		Debug.Log (_pid + " has been shot");
+    [Command]
+    void CmdShootHim(string _pid, float _dmg, string _source)
+    {
+        Debug.Log(_pid + " has been shot");
 
         NetworkPlayer _nPlayer = NetworkGameManager.GetPlayer(_pid);
-        _nPlayer.RpcTakeDamage(_dmg,_source);
-	}
+        _nPlayer.RpcTakeDamage(_dmg, _source);
+    }
 }
+

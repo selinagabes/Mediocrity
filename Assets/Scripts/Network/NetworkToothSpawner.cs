@@ -17,7 +17,6 @@ the player UI for cleanliness as the UI
 and the NetwrokPlayer class work closely
 to accomplish most of our online stuff.
 ==============================================*/
-[RequireComponent(typeof(NetworkGameManager))]
 public class NetworkToothSpawner : NetworkBehaviour {
 
     [SerializeField]
@@ -107,10 +106,13 @@ public class NetworkToothSpawner : NetworkBehaviour {
     [Command]
     void CmdSpawnTeeth()
     {
-        Vector3 spawnPosition = new Vector3(Random.Range(-8.0f, 8.0f), 0.0f, 0.0f);
-        Quaternion spawnRotation = Quaternion.Euler(0.0f, Random.Range(0, 180), 0.0f);
-        RpcSpawnTeeth(spawnPosition, spawnRotation);
-        Debug.Log("Spawning Tooth");
+        if (isServer)
+        {
+            Vector3 spawnPosition = new Vector3(Random.Range(-8.0f, 8.0f), 0.0f, 0.0f);
+            Quaternion spawnRotation = Quaternion.Euler(0.0f, Random.Range(0, 180), 0.0f);
+            RpcSpawnTeeth(spawnPosition, spawnRotation);
+            Debug.Log("Spawning Tooth");
+        }
     }
 
     [ClientRpc]

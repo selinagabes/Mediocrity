@@ -2261,10 +2261,11 @@ MonoBehaviour:
   m_PlayerPrefab: {fileID: 1000012174065354, guid: ca0e8d29129cb2c40929f389cb281556,
     type: 2}
   m_AutoCreatePlayer: 1
-  m_PlayerSpawnMethod: 0
+  m_PlayerSpawnMethod: 1
   m_OfflineScene: NetworkMenu
   m_OnlineScene: NetworkMap
-  m_SpawnPrefabs: []
+  m_SpawnPrefabs:
+  - {fileID: 1000014281198998, guid: eea93a5f03e4dc94e8e1beffe90e795c, type: 2}
   m_CustomConfig: 1
   m_MaxConnections: 2
   m_ConnectionConfig:

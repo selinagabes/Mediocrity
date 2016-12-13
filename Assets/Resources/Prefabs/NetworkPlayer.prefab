@@ -36,7 +36,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012533365510}
   - 33: {fileID: 33000014241022512}
-  - 65: {fileID: 65000013669262712}
   - 23: {fileID: 23000011556799846}
   - 54: {fileID: 54000012796672078}
   - 114: {fileID: 114000010519037770}
@@ -46,6 +45,7 @@ GameObject:
   - 114: {fileID: 114000013403651258}
   - 114: {fileID: 114000014179885168}
   - 114: {fileID: 114000010160348150}
+  - 65: {fileID: 65000010429797838}
   m_Layer: 0
   m_Name: NetworkPlayer
   m_TagString: Player
@@ -191,7 +191,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!65 &65000013669262712
+--- !u!65 &65000010429797838
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -359,7 +359,7 @@ MonoBehaviour:
     range: 30
   mask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967039
   laserBeam: {fileID: 0}
   laser1: {fileID: 0}
   laser2: {fileID: 0}
