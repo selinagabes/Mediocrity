@@ -17,6 +17,7 @@ TagManager:
   - EnemyHead
   - HitBox
   - ExplodeZone
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -26,8 +27,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - LocalPlayer
+  - RemotePlayer
   - 
   - 
   - 
