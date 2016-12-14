@@ -22,6 +22,9 @@ TagManager:
   - TopShelf
   - Shadow
   - Gun
+  - ExplodeDmgZone1
+  - ExplodeDmgZone2
+  - ShooterZone
   layers:
   - Default
   - TransparentFX

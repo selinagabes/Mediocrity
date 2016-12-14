@@ -13,8 +13,9 @@ public class ChronosMove : MonoBehaviour {
 	public Vector3 attackPos;
 	public bool explode;
 
-	float attackRate = 1.0f;
+	float attackRate = 5.0f;
 	float nextAttack = 0.0f;
+    public bool frozen = false;
 
 
 	// Use this for initialization
@@ -27,35 +28,39 @@ public class ChronosMove : MonoBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate () {
+        if (!frozen)
+        {
+            if (!explode)
+            {
+                if (wasHit)
+                {
+                    animator.SetTrigger("isHit");
+                    wasHit = false;
+                }
+                else
+                {
+                    this.transform.position += Vector3.left * 0.05f;
+                }
 
-		if (!explode) {
-			if (wasHit) {
-				animator.SetTrigger ("isHit");
-				wasHit = false;
-			} else {
-				this.transform.position += Vector3.left * 0.05f;
-			}
-
-			if (health <= 0) {
-				this.transform.position -= Vector3.left * 0.05f;
-				animator.SetBool ("isDead", true);
-				StartCoroutine (Die ());
-			}
-		} else {
-			if (Time.time > nextAttack) {
-				StartCoroutine (Attack ());
-			} else {
-
-			}
-
-		}
-		
-		
+                if (health <= 0)
+                {
+                    this.transform.position -= Vector3.left * 0.05f;
+                    animator.SetBool("isDead", true);
+                    StartCoroutine(Die());
+                }
+            }
+            else
+            {
+                if (Time.time > nextAttack)
+                {
+                    StartCoroutine(Attack());
+                }
+            }
+        }
 	}
 
 	void OnCollisionEnter(Collision col){
 		if (col.collider.tag == "bullet") {
-			Debug.Log ("bullet hit");
 			Destroy (col.gameObject);
 			wasHit = true;
 			health--;
@@ -69,19 +74,24 @@ public class ChronosMove : MonoBehaviour {
 	}
 
 	private IEnumerator Attack(){
+		GameObject exp = transform.Find("Explosion").gameObject;
+
+
 		yield return new WaitForSeconds(1.0f);
+
 		this.transform.position = attackPos;
+		yield return new WaitForSeconds (1.0f);
+		exp.gameObject.SetActive (true); //explosion happens here
+
+
+		yield return new WaitForSeconds (2.0f); //explosion lasts 2 seconds, then the chronos can attack again
+		exp.gameObject.SetActive (false);
 		explode = false;
+
 	}
 
 	public void decrementHealth(){ // when player jumps on this enemy this function gets called
 		wasHit = true;
 		health--;
 	}
-
-	public void Explosion(){
-
-	}
-
-
 }
