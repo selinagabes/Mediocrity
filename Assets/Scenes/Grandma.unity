@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44593784, g: 0.4899659, b: 0.5440274, a: 1}
+  m_IndirectSpecularColor: {r: 0.44593894, g: 0.48996687, b: 0.5440273, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -503,6 +503,7 @@ MonoBehaviour:
   wallHeight: 5
   tileSize: 4
   Walls: {fileID: 2052922836}
+  wallVertices: []
 --- !u!114 &537910503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,7 +562,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a283f1c8aa2d7d144aeb6a84f6a621bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tooth: {fileID: 1000014281198998, guid: dccba23618ab70a49a3e72a85ae1cad5, type: 2}
 --- !u!4 &539469021
 Transform:
   m_ObjectHideFlags: 0
@@ -966,6 +966,7 @@ MonoBehaviour:
   wallHeight: 5
   tileSize: 3
   Walls: {fileID: 549877650}
+  wallVertices: []
 --- !u!114 &1031613593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1133,6 +1134,7 @@ MonoBehaviour:
   wallHeight: 5
   tileSize: 4
   Walls: {fileID: 243915521}
+  wallVertices: []
 --- !u!114 &1338408138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1411,6 +1413,7 @@ MonoBehaviour:
   wallHeight: 5
   tileSize: 5
   Walls: {fileID: 772471107}
+  wallVertices: []
 --- !u!114 &1664154825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1505,6 +1508,7 @@ MonoBehaviour:
   wallHeight: 0
   tileSize: 10
   Walls: {fileID: 454773062}
+  wallVertices: []
 --- !u!1 &1735826546
 GameObject:
   m_ObjectHideFlags: 0

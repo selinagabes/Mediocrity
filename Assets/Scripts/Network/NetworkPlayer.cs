@@ -30,18 +30,24 @@ public class NetworkPlayer : NetworkBehaviour
     }
     
     public float maxHealth = 100f;
-    [SerializeField]
-    private Behaviour[] disableWhenDead;
-    private bool[] wasEnabled;
 
-    //public GameObject deathEffect;
-    //public GameObject spawnEffect;
     private bool FirstSetup = true;
     [SerializeField]
     GameObject playerUIprefab;
     private NetworkPlayerUI playerUI;
     private GameObject playerUIInstance;
     private NetworkToothSpawner GameMaster;
+    private NetworkPlayer otherPlayer;
+
+    //========================================
+    // Animator Stuff
+    //========================================
+    public Animator animator;
+    public SpriteRenderer sr;
+    Rigidbody rb;
+    public bool dirRight = true;
+
+    private float lastPosition;
 
     //========================================
     // Netowrk Stuff
@@ -54,6 +60,7 @@ public class NetworkPlayer : NetworkBehaviour
         return currentHealth;
     }
 
+    //========================================
     [SyncVar]
     private bool _isDead = false;
     public bool isDead
@@ -62,13 +69,20 @@ public class NetworkPlayer : NetworkBehaviour
         protected set { _isDead = value; }
     }
 
-    private Collider toothCollider;
-
     //========================================
     // Player Setup
     // Call the server command, to tell the
     // client to set stuff up!
     //========================================
+    void Start()
+    {
+        //Sprite Stuff
+        rb = GetComponent<Rigidbody>();
+        animator = rb.GetComponentInChildren<Animator>();
+        sr = rb.GetComponentInChildren<SpriteRenderer>();
+        GameMaster = GameObject.Find("ToothSpawner").GetComponent<NetworkToothSpawner>();
+    }
+
     public void PlayerSetup()
     {
         //Broadcast the setup
@@ -92,13 +106,6 @@ public class NetworkPlayer : NetworkBehaviour
         //========================================
         if (FirstSetup)
         {
-            wasEnabled = new bool[disableWhenDead.Length];
-            for (int i = 0; i < wasEnabled.Length; i++)
-            {
-                wasEnabled[i] = disableWhenDead[i].enabled;
-            }
-            FirstSetup = false;
-
             if (isLocalPlayer)
             {
                 //Create Player UI
@@ -117,6 +124,24 @@ public class NetworkPlayer : NetworkBehaviour
         SetStatsAndStuff();
     }
 
+    //=====================================
+    // Update
+    //=====================================
+    void Update()
+    {
+        //This updates the direction of each player nicely!
+        if (lastPosition < transform.position.x)
+        {
+            sr.flipX = true;
+        }
+        else if (lastPosition > transform.position.x)
+        {
+            sr.flipX = false;
+        }
+
+        lastPosition = transform.position.x;
+    }
+
     //====================================
     // Enable everything we need on spawn
     //====================================
@@ -124,19 +149,12 @@ public class NetworkPlayer : NetworkBehaviour
     {
         isDead = false;
 
-        //Enable Functions
-        for (int i = 0; i < disableWhenDead.Length; i++)
+        //Enable Movement and Shooting
+        if (isLocalPlayer)
         {
-            disableWhenDead[i].enabled = wasEnabled[i];
-        }
-
-        //Enable Movement
-        if(isLocalPlayer)
             GetComponent<NetworkPlayerMove>().enabled = true;
-
-        //Spawn Effect
-        //GameObject _gfxIns = (GameObject)Instantiate(spawnEffect, transform.position, Quaternion.identity);
-        //Destroy(_gfxIns, 3f);
+            GetComponent<NetworkPlayerShoot>().enabled = true;
+        }
 
         currentHealth = maxHealth;
     }
@@ -180,26 +198,21 @@ public class NetworkPlayer : NetworkBehaviour
         if (points < 0)
             points = 0;
 
-        Debug.Log(transform.name + " is dead");
-
-        //Disable Components
-        for (int i = 0; i < disableWhenDead.Length; i++)
-        {
-            disableWhenDead[i].enabled = false;
-        }
-
-        //Explode!
-        //GameObject _gfxIns = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
-        //Destroy(_gfxIns, 3f);
-        
         //Disable Movement
-        if(isLocalPlayer)
+        if (isLocalPlayer)
+        {
             GetComponent<NetworkPlayerMove>().enabled = false;
+            GetComponent<NetworkPlayerShoot>().enabled = false;
+        }
 
         //Respawn
         StartCoroutine(Respawn());
     }
 
+    //=============================================
+    // Keep them dead for 7 seconds, or eventually
+    // some sort of global time!
+    //=============================================
     IEnumerator Respawn()
     {
         //Wait Determined Time To Respawn
@@ -239,19 +252,12 @@ public class NetworkPlayer : NetworkBehaviour
     //Kill controls, everything!
     public void GameOver()
     {
-        //Disable Components
-        for (int i = 0; i < disableWhenDead.Length; i++)
-        {
-            disableWhenDead[i].enabled = false;
-        }
-
-        //Explode!
-        //GameObject _gfxIns = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
-        //Destroy(_gfxIns, 3f);
-
         //Disable Movement
         if (isLocalPlayer)
+        {
             GetComponent<NetworkPlayerMove>().enabled = false;
+            GetComponent<NetworkPlayerShoot>().enabled = false;
+        }
 
     }
 }   

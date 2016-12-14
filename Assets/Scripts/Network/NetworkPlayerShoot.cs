@@ -13,6 +13,7 @@ public class NetworkPlayerShoot : NetworkBehaviour {
     //==================================
     public NetworkPlayerWeapon RayGun;
 	private bool dirRight = true;
+    private bool canShoot = true;
 	[SerializeField]
 	private LayerMask mask;
 	private string _id;
@@ -23,6 +24,13 @@ public class NetworkPlayerShoot : NetworkBehaviour {
     public GameObject laser1;
     public GameObject laser2;
 
+    Animator animator;
+    SpriteRenderer sr;
+    Rigidbody rb;
+
+    //=================================
+    // Register the player to UNET
+    //=================================
     void Start()
 	{
 		RegisterPlayer ();
@@ -34,9 +42,11 @@ public class NetworkPlayerShoot : NetworkBehaviour {
 		_id = "Player " + GetComponent<NetworkIdentity> ().netId;
 		transform.name = _id;
 
+        //Find both lasers, then determine which one we use
         laser1 = GameObject.Find("Laser1");
         laser2 = GameObject.Find("Laser2");
 
+        //Laserbeam will be our line renderer depending on which game object we are using!
         if (NetworkGameManager.GetPlayers().Length == 1)
         {
             laserBeam = laser1.GetComponent<LineRenderer>();
@@ -45,6 +55,11 @@ public class NetworkPlayerShoot : NetworkBehaviour {
         {
             laserBeam = laser2.GetComponent<LineRenderer>();
         }
+
+        //Sprite Stuff, if we need it!
+        rb = GetComponent<Rigidbody>();
+        animator = rb.GetComponentInChildren<Animator>();
+        sr = rb.GetComponentInChildren<SpriteRenderer>();
     }
 
 	void Update()
@@ -54,14 +69,20 @@ public class NetworkPlayerShoot : NetworkBehaviour {
             //Only show if the escape menu is NOT on
             if (!NetworkDCMenu.isOn)
             {
+                if (Input.GetKeyDown(KeyCode.RightArrow))
+                {
+                    dirRight = true;
+                }
+
+                if (Input.GetKeyDown(KeyCode.LeftArrow))
+                {
+                    dirRight = false;
+                }
+
                 if (Input.GetKeyDown("space"))
                 {
-                    if (Input.GetAxis("Horizontal") > 0)
-                        dirRight = true;
-                    else if (Input.GetAxis("Horizontal") < 0)
-                        dirRight = false;
-                    
-                    FireTheLaser();
+                    if(canShoot)
+                        FireTheLaser();
                 }
             }
 		}
@@ -78,12 +99,21 @@ public class NetworkPlayerShoot : NetworkBehaviour {
     [Client]
 	void FireTheLaser()
     {
+        //Set up our raycast
         Ray ray;
         RaycastHit _hit;
-        Vector3 start = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
-        Vector3 end;
-        //laserBeam.SetPosition(0, new Vector3(this.transform.position.x,this.transform.position.y,this.transform.position.z));
 
+        //And vectors
+        Vector3 start;
+        Vector3 end;
+
+        //Determine the start position to be in front of the player, depending on direction!
+        if (dirRight)
+            start = new Vector3(this.transform.position.x + 1, this.transform.position.y, this.transform.position.z);
+        else
+            start = new Vector3(this.transform.position.x - 1, this.transform.position.y, this.transform.position.z);
+        
+        //More direction stuff!
         if (dirRight)
         {
             ray = new Ray(transform.position, new Vector3(1, 0, 0));
@@ -110,27 +140,34 @@ public class NetworkPlayerShoot : NetworkBehaviour {
             if (dirRight)
             {
                 end = new Vector3(this.transform.position.x + RayGun.range, this.transform.position.y, this.transform.position.z);
-                //laserBeam.SetPosition(1, new Vector3(this.transform.position.x + RayGun.range, this.transform.position.y, this.transform.position.z));
             }
             else
             {
                 end = new Vector3(this.transform.position.x - RayGun.range, this.transform.position.y, this.transform.position.z);
-                //laserBeam.SetPosition(1, new Vector3(this.transform.position.x  - RayGun.range, this.transform.position.y, this.transform.position.z));
             }
         }
 
         //Let's draw the laser over the network
+        //We pass the positions so they are rendered in the same place on either client
         CmdDrawLaser(start, end);
 
+        //After we fire, put the laser on cool down briefly so a player can't rapid fire and absolutely shit stomp the other guy
         StartCoroutine(DisableLaser());
     }
 
+    //========================================
+    // Send the firing command to the server
+    //========================================
     [Command]
     void CmdDrawLaser(Vector3 _1, Vector3 _2)
     {
         RpcBroadCastLaser(_1, _2);
     }
 
+    //========================================
+    // Display Line depending on Laser
+    // (Client specific)
+    //========================================
     [ClientRpc]
     void RpcBroadCastLaser(Vector3 _1, Vector3 _2)
     {
@@ -143,9 +180,14 @@ public class NetworkPlayerShoot : NetworkBehaviour {
 
     IEnumerator DisableLaser()
     {
+        canShoot = false;
+        animator.SetBool("isShooting", true);
         laserBeam.enabled = true;
         yield return new WaitForSeconds(.2f);
         laserBeam.enabled = false;
+        yield return new WaitForSeconds(.2f);
+        animator.SetBool("isShooting", false);
+        canShoot = true;
     }
 
     [Command]

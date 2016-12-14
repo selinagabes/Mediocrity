@@ -34,6 +34,11 @@ public class NetworkToothSpawner : NetworkBehaviour {
     private bool gameOn = false;
     private bool gameSwitch = true;
 
+    public bool GetGameON()
+    {
+        return gameOn;
+    }
+
     public bool GetGameStatusBoolean()
     {
         return gameSwitch;
@@ -60,19 +65,21 @@ public class NetworkToothSpawner : NetworkBehaviour {
         {
             if (gameSwitch)
             {
+                //Changed to 1.5f
                 StartCoroutine(StartGameIn3());
             }
         }
 
         if(gameOn)
         {
-            //Call the spawn function every half second!
+            //Call the spawn function every 2 seconds!
             if(Time.time > (toothTime + waitTime))
             {
                 toothTime = Time.time;
                 CmdSpawnTeeth();
             }
 
+            //Increment the game timer!
             if (Time.time > (gameTimer + 1f))
             {
                 gameTimer = Time.time;
@@ -94,6 +101,8 @@ public class NetworkToothSpawner : NetworkBehaviour {
     be ahead of the other.  By making the
     spawner wait a few seconds, it seemed
     to have cleared up any issues!
+
+        ***EDIT: changed to 1.5f
     ======================================*/
     IEnumerator StartGameIn3()
     {
@@ -106,19 +115,17 @@ public class NetworkToothSpawner : NetworkBehaviour {
     [Command]
     void CmdSpawnTeeth()
     {
-        if (isServer)
-        {
-            Vector3 spawnPosition = new Vector3(Random.Range(-40.0f, 40.0f), 5.0f, 1f);
-            Quaternion spawnRotation = Quaternion.Euler(0.0f, Random.Range(0, 180), 0.0f);
-            RpcSpawnTeeth(spawnPosition, spawnRotation);
-            Debug.Log("Spawning Tooth");
-        }
+        Vector3 spawnPosition = new Vector3(Random.Range(-50.0f, 50.0f), 5.0f, 1f);
+        Quaternion spawnRotation = Quaternion.Euler(0.0f, Random.Range(0, 180), 0.0f);
+        RpcSpawnTeeth(spawnPosition, spawnRotation);
+        Debug.Log("Spawning Tooth");
     }
 
+    //Spawn the teeth on both clients!
     [ClientRpc]
     void RpcSpawnTeeth(Vector3 sp, Quaternion sr)
     {
-            var enemy = (GameObject)Instantiate(toothPrefab, sp, sr);
-            NetworkServer.Spawn(enemy);
+        var enemy = (GameObject)Instantiate(toothPrefab, sp, sr);
+        NetworkServer.Spawn(enemy);
     }
 }
