@@ -54,8 +54,7 @@ public class MeshGenerator : MonoBehaviour
         }
         mesh.uv = uvs;
         CreateWallMesh();
-        Vector3 min = GetMinimumVertex();
-        Debug.Log(min);
+   
     }
 
     public List<Vector3> GetWalls()

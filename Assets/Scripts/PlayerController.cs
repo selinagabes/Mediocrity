@@ -3,86 +3,192 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
+    //======================================
+    // Animations and Sprite Stuff
+    //======================================
     Rigidbody rb;
-    Vector3 velocity;
-
 	Animator animator;
 	SpriteRenderer sr;
-	bool isRunning;
-	float speed;
 
-	bool dontTakeDamage; //this is if the player jumps on an enemies head, they shouldn't take damage
-
-	int direction = 1;
-
-	int numTeeth;
-
-	IEnumerator powerupTimer;
-
-	public GameObject body; //player body
-	public GameObject playerStats; //Counter in top right corner
+    //======================================
+    // Player Stuff
+    //======================================
 	public GameObject bulletPrefab;
 	Transform bulletSpawn;
 	public Transform leftShooter;
 	public Transform rightShooter;
-	private int health;
+	private float health;
 
-	public bool grounded; //used for jumping
+    //======================================
+    // Jump Stuff
+    //======================================
+    private Vector3 velocity = Vector3.zero;
+    private Vector3 jumpVelocity = Vector3.zero;
+    bool isJumping = false;
+    bool isGrounded = false;
+    bool doubleJump = false;
 
-	bool currentlyShooting;
-	float fireRate = 1.0f;
+    //======================================
+    // Health / Damage Stuff
+    //======================================
+    float fireRate = 1.0f;
 	float nextFire = 0.0f;
-
 	float damageRate = 1.0f;
 	float nextDamage = 0.0f;
+    int direction = 1;
+    bool isAlive;
+    bool isPlaying; //Use for menus and such
+    bool currentlyShooting;
 
-	// Use this for initialization
+    //======================================
+    // Start and Set up the Player!
+    //======================================
     void Start()
     {
+        //Sprite Stuff
         rb = GetComponent<Rigidbody>();   
 		animator = body.GetComponent<Animator> ();
 		sr = body.GetComponent<SpriteRenderer> ();
 
-		grounded = true;
-		isRunning = false;
-		speed = 0.2f;
+        isPlaying = true;
 
-		bulletSpawn = leftShooter;
-		numTeeth = 32;
-		currentlyShooting = false;
-		health = 10;
+        PlayerSpawn();
     }
 
-	void FixedUpdate () {
+    public void PlayerSpawn()
+    {
+        //Bools
+        isGrounded = false;
+        isRunning = false;
+        currentlyShooting = false;
+        isAlive = true;
 
-		if (health != 0) {
+        //Stats and Stuff
+        bulletSpawn = leftShooter;
+        numTeeth = 32;
+        health = 10;
+    }
 
-			//RUNNING SPEED
+    //=======================================================
+    // Calculate Everything for Positioning Here
+    //=======================================================
+    void Update()
+    {
+        if (isPlaying)
+        {
+            if (isAlive)
+            {
+                // ============== Fire! ====================
+                if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt))
+                {
+                    if (!currentlyShooting)
+                    {
+                        animator.SetBool("isShooting", true);
+                        if (numTeeth > 0)
+                        {
+                            StartCoroutine(SingleFire());
+                        }
+                        else
+                        {
+                            animator.SetBool("isShooting", false);
+                            currentlyShooting = false;
+                        }
+                    }
+                }
 
-			if (isRunning) { //first check what the characters speed should be
-				speed = 0.4f;
-			} else {
-				speed = 0.2f;
-			}
+                // ============== Move & Jump ====================
+                if (Input.GetKey(KeyCode.LeftArrow))
+                {
+                    direction = -1;
+                    bulletSpawn = leftShooter;
+                    animator.SetBool("isWalking", true);
+                    sr.flipX = false;
+                }
+                if (Input.GetKey(KeyCode.RightArrow))
+                {
+                    direction = 1;
+                    bulletSpawn = rightShooter;
+                    animator.SetBool("isWalking", true);
+                    sr.flipX = true;
+                }
+                if (!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
+                {
+                    animator.SetBool("isWalking", false);
+                }
 
-			//DIRECTION
+                RaycastHit _hit;
 
-			KeyMovement ();
+                //Grounded?
+                Debug.DrawRay(transform.position, Vector3.down, Color.red, 6f);
+                if (Physics.Raycast(transform.position, Vector3.down, out _hit, 3f))
+                {
+                    isGrounded = true;
+                }
+                else
+                {
+                    isGrounded = false;
+                }
 
-			//POWERUPS
+                //Jump and Double Jump! yay!
+                if (Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    if (isGrounded)
+                    {
+                        Debug.Log("Jump!");
+                        isJumping = true;
+                    }
 
-			//PLAYER STATS
-			playerStats.GetComponent<GUIText> ().text = "HP: " + health + "\nTeeth: " + numTeeth; 
-		} else {
-			//you died son
-			playerStats.GetComponent<GUIText> ().text = "DEAD x_x"; 
-		}
+                    if (isJumping)
+                    {
+                        rb.AddForce(new Vector3(0, 5000f, 0));
+                        isJumping = false;
+                        doubleJump = true;
+                    }
+                    else
+                    {
+                        if (doubleJump)
+                        {
+                            rb.AddForce(new Vector3(0, 5000f, 0));
+                            doubleJump = false;
+                        }
+                    }
+                }
+                velocity = new Vector3(Input.GetAxisRaw("Horizontal"), 0, 0);
+            }
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (isPlaying)
+        { 
+            if (isAlive)
+            {
+                rb.MovePosition(transform.position + velocity * Time.deltaTime * 15f);
+            }
+        }
 	}
 
+    private IEnumerator SingleFire()
+    {
+        currentlyShooting = true;
+
+        yield return new WaitForSeconds(0.5f);
+
+        numTeeth--;
+        var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.identity);
+        Physics.IgnoreCollision(bullet.GetComponent<Collider>(), this.GetComponent<Collider>());
+        bullet.GetComponent<Rigidbody>().AddForce(new Vector3(1200 * direction, 0, 0));
+        Destroy(bullet, 4.0f);
+        animator.SetBool("isShooting", false);
+
+        yield return new WaitForSeconds(2f);
+
+        currentlyShooting = false;
+    }
 
     void OnTriggerEnter(Collider other)
     {
-      
         if (other.gameObject.CompareTag("Tooth"))
         {
 			numTeeth++;
@@ -91,37 +197,39 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Death"))
         {
             Debug.Log("You dead");
-            //other.gameObject.SetActive(false);
         }
         if (other.gameObject.CompareTag("EndZone"))
         {
-            gameObject.SetActive(false);
-            var currentZone = GameObject.FindGameObjectWithTag("Zone");
-            float nextZoneX = currentZone.GetComponentInChildren<MapGenerator>().width - currentZone.GetComponentInChildren<MeshGenerator>().wallHeight + currentZone.transform.position.x;
-            Vector3 nextZonePos = new Vector3(nextZoneX, 0, 0);
-            var nextZone = GameObject.FindGameObjectWithTag("ZoneManager");
-            nextZone.GetComponent<ZoneGenerator>().RestartZone(nextZonePos);
-            MeshGenerator nextMesh = GameObject.FindGameObjectWithTag("LevelPath").GetComponent<MeshGenerator>();
-            Vector3 nextMin = nextMesh.GetMinimumVertex();
-            transform.position = new Vector3(nextMin.x + 5f, nextMin.z + 1f, 2.5f);
-            gameObject.SetActive(true);
-            //ONCE INSTANTIATED, TELEPORT TO THE MINIMUM VERTEX AND STUFF.......
-
-
-            Debug.Log("New Zone");
+            
         }
+        if (other.GetComponent<Collider>().tag == "EnemyHead")
+        { //check which enemy it is, decrement health
+            if (other.transform.parent.gameObject.GetComponent<GUIText>().text == "BookGhost")
+            {
+                other.transform.parent.gameObject.GetComponent<BookGhostMove>().decrementHealth();
 
-		if (other.GetComponent<Collider>().tag == "EnemyHead") {
+            }
+            else if (other.transform.parent.gameObject.GetComponent<GUIText>().text == "Chronos")
+            {
+                //other.transform.parent.gameObject.GetComponent<ChronosMove>().decrementHealth();
+            }
+            else if (other.transform.parent.gameObject.GetComponent<GUIText>().text == "ElderBookGhost")
+            {
+                //other.transform.parent.gameObject.GetComponent<ElderBookGhost>().decrementHealth();
+            }
+            dontTakeDamage = true;
+        }
+        if (other.GetComponent<Collider>().tag == "EnemyHead") { //check which enemy it is, decrement health
 			if (other.transform.parent.gameObject.GetComponent<GUIText>().text == "BookGhost") {
 				other.transform.parent.gameObject.GetComponent<BookGhostMove>().decrementHealth();
 
 			} else if (other.transform.parent.gameObject.GetComponent<GUIText>().text == "Chronos"){
-				other.transform.parent.gameObject.GetComponent<ChronosMove>().decrementHealth();
-
+				//other.transform.parent.gameObject.GetComponent<ChronosMove>().decrementHealth();
+			} else if (other.transform.parent.gameObject.GetComponent<GUIText>().text == "ElderBookGhost"){
+				//other.transform.parent.gameObject.GetComponent<ElderBookGhost>().decrementHealth();
 			}
 			dontTakeDamage = true;
 		}
-
 		if (other.tag == "ExplodeZone") {
 			other.transform.parent.gameObject.GetComponent<ChronosMove> ().explode = true;
 			other.transform.parent.gameObject.GetComponent<ChronosMove> ().attackPos = this.transform.position;
@@ -137,92 +245,22 @@ public class PlayerController : MonoBehaviour
 
     }
 
-	void OnCollisionEnter(Collision col){
-
-		if (col.collider.tag == "powerup") {
+	void OnCollisionEnter(Collision col)
+    {
+		if (col.collider.tag == "powerup")
+        {
 			animator.SetBool ("hasGun", true);
 			StartCoroutine (PowerupTimeout());
 		}
-
-
 	}
 
-
-	//TODO: check if the char has collided with anthing tagged "ground"
-	void KeyMovement(){
-		
-		if (currentlyShooting == false) { //if not currently shooting the player can walk
-			if (Input.GetKey (KeyCode.LeftArrow)) { 
-				direction = -1;
-				bulletSpawn = leftShooter;
-				this.transform.position += Vector3.left * speed;
-				animator.SetBool ("isWalking", true);
-				sr.flipX = false;
-			}
-			if (Input.GetKey (KeyCode.RightArrow)) {
-				direction = 1;
-				bulletSpawn = rightShooter;
-				this.transform.position += Vector3.right * speed;
-				animator.SetBool ("isWalking", true);
-				sr.flipX = true;
-			}
-			if (!Input.GetKey (KeyCode.LeftArrow) && !Input.GetKey (KeyCode.RightArrow)) {
-				animator.SetBool ("isWalking", false);	
-			}
-
-			//JUMP
-
-			if (Input.GetKeyDown (KeyCode.Space) || Input.GetKey (KeyCode.UpArrow)) {
-				rb.velocity = new Vector3 (0, 20, 0);
-			}
-		}
-
-		//SHOOT
-
-		if (Input.GetKey (KeyCode.LeftAlt) || Input.GetKey (KeyCode.RightAlt)) {
-			if (!currentlyShooting && Time.time > nextFire) {
-				animator.SetBool ("isShooting", true);
-				if (numTeeth > 0) {
-					StartCoroutine (Fire ());
-				} else {
-					animator.SetBool ("isShooting", false);
-					currentlyShooting = false;
-				}
-				nextFire = Time.time + fireRate;
-			} 
-		} else {
-			currentlyShooting = false;
-		}
-
-		if (Input.GetKey (KeyCode.LeftControl) || Input.GetKey (KeyCode.RightControl)) {
-			isRunning = true;
-		} else {
-			isRunning = false;
-		}
-	}
-
-	private IEnumerator Fire(){
-		currentlyShooting = true;
-		yield return new WaitForSeconds (0.5f);
-
-		var bullet = (GameObject)Instantiate (bulletPrefab, bulletSpawn.position, Quaternion.identity);
-		Physics.IgnoreCollision (bullet.GetComponent<Collider> (), this.GetComponent<Collider> ());
-		bullet.GetComponent<Rigidbody> ().AddForce(new Vector3(1200 * direction, 0, 0));
-		Destroy (bullet, 4.0f);
-
-		currentlyShooting = false;
-		numTeeth--;
-		animator.SetBool ("isShooting", false);
-
-	}
-
-	private IEnumerator PowerupTimeout(){
-		while (true) {
-			yield return new WaitForSeconds (30f);
-			animator.SetBool ("hasGun", false);
-		}
-	}
-
+    private IEnumerator PowerupTimeout()
+    {
+        //Only keep gun for 30 seconds
+        yield return new WaitForSeconds(30f);
+        animator.SetBool("hasGun", false); 
+    }
+    
 	public void decrementHealth(){ // when player gets hit
 		animator.SetBool ("isHit", true);
 		health--;
