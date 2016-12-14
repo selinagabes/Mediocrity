@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.4.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -65,8 +63,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\BulletCollision.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
-    <Compile Include="Assets\Scripts\SpawnController.cs" />
+    <Compile Include="Assets\Scripts\Enemies\BookGhostMove.cs" />
+    <Compile Include="Assets\Scripts\Enemies\ChronosMove.cs" />
+    <Compile Include="Assets\Scripts\EnemyHealth.cs" />
     <Compile Include="Assets\Scripts\Helper.cs" />
     <Compile Include="Assets\Scripts\InstantiatePlayer.cs" />
     <Compile Include="Assets\Scripts\Interpolater.cs" />
@@ -78,7 +79,9 @@
     <Compile Include="Assets\Scripts\SelectOnInput.cs" />
     <Compile Include="Assets\Scripts\Slerper.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />
+    <Compile Include="Assets\Scripts\SpawnController.cs" />
     <Compile Include="Assets\Scripts\SpinIt.cs" />
+    <Compile Include="Assets\Scripts\ZoneGenerator.cs" />
     <Compile Include="Assets\Unity UI Sample\Scripts\ActiveStateToggler.cs" />
     <Compile Include="Assets\Unity UI Sample\Scripts\ApplicationManager.cs" />
     <Compile Include="Assets\Unity UI Sample\Scripts\ChangeColor.cs" />
@@ -92,9 +95,22 @@
     <Compile Include="Assets\Unity UI Sample\Scripts\TiltWindow.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Prefabs\Textures and Sprites\SF UI\Background\LICENSE.txt" />
+    <None Include="Assets\Needleteeth Font Suite Info and Read Me.txt" />
+    <None Include="Assets\Sprites\Alice Sprites\Alice Gun\data.xml" />
+    <None Include="Assets\Sprites\Alice Sprites\data.xml" />
+    <None Include="Assets\Sprites\Allan Sprites\Allan Gun\data.xml" />
+    <None Include="Assets\Sprites\Allan Sprites\data.xml" />
+<<<<<<< HEAD
     <None Include="Assets\Unity UI Sample\Fonts\Jupiter\LICENSE.txt" />
     <None Include="Assets\Unity UI Sample\Materials\UI-Default-No-Alpha.shader" />
+    <None Include="Assets\Unity UI Sample\Textures and Sprites\SF UI\Background\LICENSE.txt" />
+  </ItemGroup>
+   <ItemGroup>
+=======
+>>>>>>> ec581a4fabe2732b0f6a105dd30588ea6d5187f5
+    <None Include="Assets\Unity UI Sample\Fonts\Jupiter\LICENSE.txt" />
+    <None Include="Assets\Unity UI Sample\Materials\UI-Default-No-Alpha.shader" />
+    <None Include="Assets\Unity UI Sample\Textures and Sprites\SF UI\Background\LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
