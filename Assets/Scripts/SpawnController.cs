@@ -143,6 +143,7 @@ public class SpawnController : MonoBehaviour
         public GameObject TeethStairs;
         public GameObject Stairs;
         public GameObject Portal;
+        public GameObject Clock;
 
         public Stuff()
         {
@@ -151,6 +152,7 @@ public class SpawnController : MonoBehaviour
             Tooth = (GameObject)Resources.Load("Prefabs/Tooth");
             TeethStairs = (GameObject)Resources.Load("Prefabs/TeethStairs");
             Stairs = (GameObject)Resources.Load("Prefabs/Stairs");
+           Clock = (GameObject)Resources.Load("Prefabs/TimeFreeze");
         }
         public Stuff(GameObject death, GameObject tooth, GameObject teethStairs, GameObject stairs, GameObject portal)
         {
