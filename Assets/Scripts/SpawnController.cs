@@ -4,16 +4,21 @@ using System.Linq;
 
 public class SpawnController : MonoBehaviour
 {
+    public int numOfPlatforms = -1;
+    public int numOfPowerUps = -1;
+    public string SceneName;
 
     List<Vector3> path = new List<Vector3>();
-    Dictionary<Vector3, GameObject> ToothSpawns = new Dictionary<Vector3, GameObject>();
-    Dictionary<Vector3, GameObject> StairSpawns = new Dictionary<Vector3, GameObject>();
-    Dictionary<Vector3, GameObject> PortalSpawns = new Dictionary<Vector3, GameObject>();
+    Dictionary<Vector3, GameObject> PlatformMap = new Dictionary<Vector3, GameObject>();
+    Dictionary<Vector3, GameObject> PowerUpMap = new Dictionary<Vector3, GameObject>();
+
 
     Vector3 minVertex;
     Vector3 maxVertex;
     MeshGenerator meshGen;
-    Stuff stuff;
+    PowerUp _PowerUps;
+    Platforms _Platforms;
+    GameObject PlayerOne;
     void Start()
     {
         Spawn();
@@ -22,64 +27,72 @@ public class SpawnController : MonoBehaviour
     public void Spawn()
     {
 
-        stuff = new Stuff();
-
+        _PowerUps = new PowerUp();
+        _Platforms = new Platforms();
+        PlayerOne = (GameObject)Resources.Load("Prefabs/Player");
         meshGen = GameObject.FindGameObjectWithTag("LevelPath").GetComponent<MeshGenerator>();
         minVertex = meshGen.GetMinimumVertex();
         maxVertex = meshGen.GetMaximumVertex();
         path = meshGen.GetWalls().Where(w => w.z <= minVertex.z + 5 && w.x > minVertex.x).OrderBy(w => w.x).ToList();
-        PlacePortal();
-        PlaceTeeth();
-        PlaceStairs();
-        ReadjustMap();
+        SpawnPlayerOne();
+        PlacePowerUps();
+        PlacePlatforms();
+
     }
 
-    void PlacePortal()
+    void SpawnPlayerOne()
     {
 
-        List<Vector3> beforeWallPath = path.Where(p => p.x >= maxVertex.x - 6 & p.z <= maxVertex.z + 5).ToList();
-        maxVertex = beforeWallPath.First();
-        Vector3 spawnPoint = new Vector3(maxVertex.x, maxVertex.z + 1, 2.5f);
-        GameObject portalSpawn = (GameObject)Instantiate(stuff.Portal, spawnPoint, new Quaternion());
-        PortalSpawns.Add(spawnPoint, portalSpawn);
+      
+       Vector3 spawnPoint = new Vector3(minVertex.x + 5, minVertex.z + 1, 2.5f);
+        // Debug.Log(spawnPoint);      
+        PlayerOne = (GameObject)Instantiate(PlayerOne, spawnPoint, new Quaternion());
+
+
+        PlayerOne.SetActive(true);
     }
-    void PlaceTeeth()
+    void PlacePlatforms()
     {
-
+        GameObject[] PlatformArray = _Platforms.GetAllPlatoforms(SceneName).ToArray();
         int numOfVertices = path.Count;
+        int pathMin = 10;
+        int pathMax = numOfPlatforms == -1 ? numOfVertices / PlatformArray.Count() : numOfVertices / numOfPlatforms;
+        int randomPathIndex = Random.Range(pathMin, pathMax);
+        int randomPlatformIndex = Random.Range(0, PlatformArray.Count() - 1);
 
-        for (int i = 1; i < 19; i++)
+        for (int i = 0; i < numOfPlatforms; i++)
         {
-            Vector3 spawnPoint = GetSpawnPoint(3, ToothSpawns);
+            Vector3 spawnPoint = GetSpawnPoint(10, PlatformMap);
+            GameObject platform = PlatformArray[randomPlatformIndex];
+            platform = (GameObject)Instantiate(platform, spawnPoint, new Quaternion());
+            PlatformMap.Add(spawnPoint, platform);
 
-            GameObject currentTooth = (GameObject)Instantiate(stuff.Tooth, spawnPoint, new Quaternion());
-            ToothSpawns.Add(spawnPoint, currentTooth);
+            randomPlatformIndex = Random.Range(0, PlatformArray.Count() - 1);
 
         }
     }
-    // Update is called once per frame
-    void PlaceStairs()
+    void PlacePowerUps()
     {
-        //  MeshGenerator meshGen = GameObject.FindGameObjectWithTag("LevelPath").GetComponent<MeshGenerator>();
+        GameObject[] PowerArray = _PowerUps.GetAllPowerUps().ToArray();
         int numOfVertices = path.Count;
+        int pathMin = 10;
+        int pathMax = numOfPowerUps == -1 ? numOfVertices / PowerArray.Count() : numOfVertices / numOfPowerUps;
+        int randomPathIndex = Random.Range(pathMin, pathMax);
+        int randomPowerndex = Random.Range(0, PowerArray.Count() - 1);
 
-        int min = 10;
-        int max = numOfVertices / 3;
-        int index = Random.Range(min, max);
-
-        for (int i = 1; i <= 3; i++)
+        for (int i = 0; i < numOfPowerUps; i++)
         {
-            Vector3 spawnPoint = GetSpawnPoint(10, StairSpawns);
+            Vector3 spawnPoint = GetSpawnPoint(3, PowerUpMap);
+            GameObject power = PowerArray[randomPowerndex];
+            power = (GameObject)Instantiate(power, spawnPoint, new Quaternion());
+            PowerUpMap.Add(spawnPoint, power);
 
-            GameObject currentStairs = (GameObject)Instantiate(stuff.Stairs, spawnPoint, new Quaternion());
-            StairSpawns.Add(spawnPoint, currentStairs);
-            min = max;
-            max += (numOfVertices / 3);
-            index = Random.Range(min, max);
-            index = index < numOfVertices ? index : index - (min / i);
+            randomPowerndex = Random.Range(0, PowerArray.Count() - 1);
 
         }
     }
+
+
     Vector3 GetSpawnPoint(int spacing, Dictionary<Vector3, GameObject> spawns)
     {
         int min = spacing;
@@ -106,65 +119,72 @@ public class SpawnController : MonoBehaviour
             index = Random.Range(min, max);
             spawnPoint = new Vector3(path[index].x, path[index].z + 1, 3);
         }
-        if (PortalSpawns.Any(p => p.Key.x <= spawnPoint.x + spacing))
-        {
-            Debug.Log("suh");
-        }
+
         return spawnPoint;
     }
-    void ReadjustMap()
-    {
-        foreach (var clone in StairSpawns)
-        {
-            if (ToothSpawns.Any(t => t.Key.x >= clone.Key.x - 6 && t.Key.x <= clone.Key.x + 6))
-            {
 
-                foreach (var tClone in ToothSpawns)
-                {
-                    if (tClone.Key.x >= clone.Key.x - 6 && tClone.Key.x <= clone.Key.x + 6)
-                    {
-                        Destroy(ToothSpawns[tClone.Key].gameObject);
-                    }
-                }
-                Instantiate(stuff.TeethStairs, clone.Key, new Quaternion());
-                Vector3 spawnPoint = new Vector3(clone.Key.x + 2, clone.Key.y - 5.5f, clone.Key.z + 6.5f);
-                Instantiate(stuff.Death, spawnPoint, new Quaternion());
-                Destroy(StairSpawns[clone.Key].gameObject);
-            }
-        }
 
-    }
     public class Platforms
     {
+        public GameObject Crumblers;
         public GameObject TeethStairs;
-        public GameObject Stairs;
         public GameObject Couch;
         public GameObject BookShelf;
         public Platforms()
         {
-            TeethStairs = (GameObject)Resources.Load("Prefabs/TeethStairs");
-            Stairs = (GameObject)Resources.Load("Prefabs/Stairs");
+            TeethStairs = (GameObject)Resources.Load("Prefabs/Platforms/TeethStairs");
+            BookShelf = (GameObject)Resources.Load("Prefabs/Platforms/BookCases");
+            Couch = (GameObject)Resources.Load("Prefabs/Platforms/Couches");
+            Crumblers = (GameObject)Resources.Load("Prefabs/Platforms/Crumblers");
         }
+
+        public List<GameObject> GetAllPlatoforms(string scene)
+        {
+            List<GameObject> platforms = new List<GameObject>();
+            if (scene == "Grandma" || scene == "Gen")
+                platforms.Add(Couch);
+            if (scene == "Library" || scene == "Gen")
+                platforms.Add(BookShelf);
+
+
+            platforms.Add(TeethStairs);
+
+            return platforms;
+        }
+
+
     }
 
 
-    public class Stuff
+    public class PowerUp
     {
-        public GameObject Death;
+
         public GameObject Tooth;
-
-
+        public GameObject Denture;
         public GameObject Portal;
         public GameObject Clock;
+        public GameObject Shadow;
 
-        public Stuff()
+        public PowerUp()
         {
-            Portal = (GameObject)Resources.Load("Prefabs/Portal");
-            Death = (GameObject)Resources.Load("Prefabs/DeathZone");
-            Tooth = (GameObject)Resources.Load("Prefabs/Tooth");
-
-            Clock = (GameObject)Resources.Load("Prefabs/TimeFreeze");
+            Portal = (GameObject)Resources.Load("Prefabs/PowerUps/Portal");
+            Tooth = (GameObject)Resources.Load("Prefabs/PowerUps/Tooth");
+            Denture = (GameObject)Resources.Load("Prefabs/PowerUps/Denture");
+            Clock = (GameObject)Resources.Load("Prefabs/PowerUps/TimeFreeze");
+            Shadow = (GameObject)Resources.Load("Prefabs/PowerUps/Shadow");
         }
-       
+
+        public List<GameObject> GetAllPowerUps()
+        {
+            List<GameObject> powerUps = new List<GameObject>();
+            powerUps.Add(Portal);
+            powerUps.Add(Tooth);
+            powerUps.Add(Tooth);
+            powerUps.Add(Clock);
+            powerUps.Add(Shadow);
+            return powerUps;
+
+        }
+
     }
 }

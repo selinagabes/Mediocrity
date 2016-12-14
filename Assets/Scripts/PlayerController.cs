@@ -28,42 +28,52 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Tooth"))
         {
+            //TODO:: ADD 1 TOOTH
+            other.gameObject.SetActive(false);
+        }
+        if (other.gameObject.CompareTag("Denture"))
+        {
+            //TODO:: ADD 32 TEETH
             other.gameObject.SetActive(false);
         }
         if (other.gameObject.CompareTag("TimeZone"))
         {
+            //TODO:: FREEZE ALL ENEMIES
             Debug.Log("TimeFreeze");
             other.gameObject.SetActive(false);
 
         }
-        if (other.gameObject.CompareTag("Death"))
+        if (other.gameObject.CompareTag("Shadow"))
         {
-            Debug.Log("You dead");
+            //TODO:CLOAK OF INVISIBILITY
+            Debug.Log("You can see't see me");
             //other.gameObject.SetActive(false);
         }
+      
         if (other.gameObject.CompareTag("EndZone"))
         {
-            gameObject.SetActive(false);
-            var currentZone = GameObject.FindGameObjectWithTag("Zone");
-            float nextZoneX = currentZone.GetComponentInChildren<MapGenerator>().width - currentZone.GetComponentInChildren<MeshGenerator>().wallHeight + currentZone.transform.position.x;
-            Vector3 nextZonePos = new Vector3(nextZoneX, 0, 0);
-            var nextZone = GameObject.FindGameObjectWithTag("ZoneManager");
-            nextZone.GetComponent<ZoneGenerator>().RestartZone(nextZonePos);
-            MeshGenerator nextMesh = GameObject.FindGameObjectWithTag("LevelPath").GetComponent<MeshGenerator>();
-            Vector3 nextMin = nextMesh.GetMinimumVertex();
-            transform.position = new Vector3(nextMin.x + 5f, nextMin.z + 1f, 2.5f);
-            gameObject.SetActive(true);
-            //ONCE INSTANTIATED, TELEPORT TO THE MINIMUM VERTEX AND STUFF.......
-
-
-            Debug.Log("New Zone");
+            //TODO:: YOU GET A LUCID POINT YEEAHHH
+            Debug.Log("Portal");
+        }
+        if (other.gameObject.CompareTag("Gun"))
+        {
+            //TODO:: PEW PEW
+            Debug.Log("Say hello to my little friend");
         }
         if (other.gameObject.CompareTag("TopShelf"))
         {
+
+            //TODO:: CRUMBLE THOSE STEPS YEAS
             GameObject Crumbler = (GameObject)Resources.Load("Prefabs/Crumbler");
             Instantiate(Crumbler, other.transform.position, new Quaternion());
             other.gameObject.SetActive(false);
             //Debug.Log("You dead");
+            //other.gameObject.SetActive(false);
+        }
+        if (other.gameObject.CompareTag("Death"))
+        {
+            //TODO:L YOU DEAD
+            Debug.Log("You dead");
             //other.gameObject.SetActive(false);
         }
 

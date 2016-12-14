@@ -5,8 +5,7 @@ using System.Linq;
 public class CameraController : MonoBehaviour
 {
 
-   GameObject player;
-    private Vector3 offset;
+    GameObject player;
     float distance = 20f;
     // Use this for initialization
     void Start()
