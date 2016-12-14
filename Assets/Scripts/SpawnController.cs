@@ -4,7 +4,7 @@ using System.Linq;
 
 public class SpawnController : MonoBehaviour
 {
- 
+
     List<Vector3> path = new List<Vector3>();
     Dictionary<Vector3, GameObject> ToothSpawns = new Dictionary<Vector3, GameObject>();
     Dictionary<Vector3, GameObject> StairSpawns = new Dictionary<Vector3, GameObject>();
@@ -17,14 +17,14 @@ public class SpawnController : MonoBehaviour
     void Start()
     {
         Spawn();
-       // Invoke("Spawn", Time.deltaTime);
+        // Invoke("Spawn", Time.deltaTime);
     }
     public void Spawn()
     {
 
         stuff = new Stuff();
 
-       meshGen = GameObject.FindGameObjectWithTag("LevelPath").GetComponent<MeshGenerator>();
+        meshGen = GameObject.FindGameObjectWithTag("LevelPath").GetComponent<MeshGenerator>();
         minVertex = meshGen.GetMinimumVertex();
         maxVertex = meshGen.GetMaximumVertex();
         path = meshGen.GetWalls().Where(w => w.z <= minVertex.z + 5 && w.x > minVertex.x).OrderBy(w => w.x).ToList();
@@ -36,7 +36,7 @@ public class SpawnController : MonoBehaviour
 
     void PlacePortal()
     {
-      
+
         List<Vector3> beforeWallPath = path.Where(p => p.x >= maxVertex.x - 6 & p.z <= maxVertex.z + 5).ToList();
         maxVertex = beforeWallPath.First();
         Vector3 spawnPoint = new Vector3(maxVertex.x, maxVertex.z + 1, 2.5f);
@@ -45,7 +45,7 @@ public class SpawnController : MonoBehaviour
     }
     void PlaceTeeth()
     {
-       
+
         int numOfVertices = path.Count;
 
         for (int i = 1; i < 19; i++)
@@ -87,7 +87,7 @@ public class SpawnController : MonoBehaviour
         int numOfVertexes = path.Count;
         int index = Random.Range(min, max);
         Vector3 spawnPoint = new Vector3();
-    
+
         //check if it's out of range
         if (index > numOfVertexes)
             index %= numOfVertexes;
@@ -96,7 +96,7 @@ public class SpawnController : MonoBehaviour
 
         //check if it is in range of another staircase
 
-        while (spawnPoint.x >= meshGen.GetMaximumVertex().x - (spacing) * 2     //if it's too far ahead
+        while (spawnPoint.x >= maxVertex.x - (spacing) * 2     //if it's too far ahead
             || spawns.ContainsKey(spawnPoint)
             // || PortalSpawns.Any(p=>p.Key.x <= spawnPoint.x+spacing)     //or it's too close to the portal
             || spawns.Any(s => s.Key.x >= spawnPoint.x - spacing
@@ -134,33 +134,37 @@ public class SpawnController : MonoBehaviour
         }
 
     }
+    public class Platforms
+    {
+        public GameObject TeethStairs;
+        public GameObject Stairs;
+        public GameObject Couch;
+        public GameObject BookShelf;
+        public Platforms()
+        {
+            TeethStairs = (GameObject)Resources.Load("Prefabs/TeethStairs");
+            Stairs = (GameObject)Resources.Load("Prefabs/Stairs");
+        }
+    }
 
 
     public class Stuff
     {
         public GameObject Death;
         public GameObject Tooth;
-        public GameObject TeethStairs;
-        public GameObject Stairs;
+
+
         public GameObject Portal;
         public GameObject Clock;
 
         public Stuff()
         {
-            Portal= (GameObject)Resources.Load("Prefabs/Portal");
+            Portal = (GameObject)Resources.Load("Prefabs/Portal");
             Death = (GameObject)Resources.Load("Prefabs/DeathZone");
             Tooth = (GameObject)Resources.Load("Prefabs/Tooth");
-            TeethStairs = (GameObject)Resources.Load("Prefabs/TeethStairs");
-            Stairs = (GameObject)Resources.Load("Prefabs/Stairs");
-           Clock = (GameObject)Resources.Load("Prefabs/TimeFreeze");
+
+            Clock = (GameObject)Resources.Load("Prefabs/TimeFreeze");
         }
-        public Stuff(GameObject death, GameObject tooth, GameObject teethStairs, GameObject stairs, GameObject portal)
-        {
-            Death = death;
-            Tooth = tooth;
-            TeethStairs = teethStairs;
-            Stairs = stairs;
-            Portal = portal;
-        }
+       
     }
 }

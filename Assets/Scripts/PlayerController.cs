@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         {
             other.gameObject.SetActive(false);
         }
-        if (other.gameObject.CompareTag("TimeFreeze"))
+        if (other.gameObject.CompareTag("TimeZone"))
         {
             Debug.Log("TimeFreeze");
             other.gameObject.SetActive(false);
@@ -57,6 +57,14 @@ public class PlayerController : MonoBehaviour
 
 
             Debug.Log("New Zone");
+        }
+        if (other.gameObject.CompareTag("TopShelf"))
+        {
+            GameObject Crumbler = (GameObject)Resources.Load("Prefabs/Crumbler");
+            Instantiate(Crumbler, other.transform.position, new Quaternion());
+            other.gameObject.SetActive(false);
+            //Debug.Log("You dead");
+            //other.gameObject.SetActive(false);
         }
 
     }

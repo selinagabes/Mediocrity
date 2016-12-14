@@ -18,6 +18,8 @@ TagManager:
   - HitBox
   - ExplodeZone
   - TimeZone
+  - Denture
+  - TopShelf
   layers:
   - Default
   - TransparentFX
